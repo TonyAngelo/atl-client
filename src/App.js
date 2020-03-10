@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
+import { Container, Row, Col, Nav } from 'react-bootstrap';
+import Routes from "./Routes";
 import './App.css';
 
 function App() {
+  const [headerCatagories, setHeaderCatagories] = useState([
+    'Atlantis Finder', 'Questions', 'Theories', 'Sources', 'People', 'Plato', 'Catastrophism', 'About', 'Contact'
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div id="home">
+      <Container>
+        <header className="blog-header py-3">
+          <Row className="flex-nowrap justify-content-between align-items-center">
+            <Col md={4} className="pt-1">
+              <p></p>
+            </Col>
+            <Col md={4} className="text-center">
+              <Link className="blog-header-logo text-dark" to="/">Atlantis FYI</Link>
+            </Col>
+            <Col md={4} className="d-flex justify-content-end align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+            </Col>
+          </Row>
+        </header>
+        <div className="nav-scroller py-1 mb-2">
+          <Nav className="d-flex justify-content-between">
+            {headerCatagories.map((item, index) => 
+              <Link key={index} to={"/" + item.toLowerCase().replace(' ', '-')} className="p-2 text-muted">
+                <Nav.Item eventKey={index}>{item}</Nav.Item>
+              </Link>
+            )}
+          </Nav>
+        </div>
+        <Routes appProps={{ }} />
+      </Container>
+      <footer class="blog-footer">
+        <p></p>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <Link to="#home">Back to top</Link>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </footer>
     </div>
   );
 }
