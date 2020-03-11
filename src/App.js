@@ -21,7 +21,7 @@ function App() {
               <Link className="blog-header-logo text-dark" to="/">Atlantis FYI</Link>
             </Col>
             <Col md={4} className="d-flex justify-content-end align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
             </Col>
           </Row>
         </header>
@@ -29,14 +29,14 @@ function App() {
           <Nav className="d-flex justify-content-between">
             {headerCatagories.map((item, index) => 
               <Link key={index} to={"/" + item.toLowerCase().replace(' ', '-')} className="p-2 text-muted">
-                <Nav.Item eventKey={index}>{item}</Nav.Item>
+                <Nav.Item>{item}</Nav.Item>
               </Link>
             )}
           </Nav>
         </div>
         <Routes appProps={{ }} />
       </Container>
-      <footer class="blog-footer">
+      <footer className="blog-footer">
         <p></p>
         <p>
           <Link to="#home">Back to top</Link>

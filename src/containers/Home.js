@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Button, Jumbotron, Card } from 'react-bootstrap';
 import MyJumbotron from "../components/Jumbotron";
@@ -8,6 +8,30 @@ import SidebarPost from "../components/SidebarPost";
 //import "./Home.css";
 
 export default function Home() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function onLoad() {
+      try {
+        //const payload = loadPosts();
+        const response = await fetch("http://api.atlantis.fyi/wp-json/wp/v2/posts?page=1&per_page=7&_fields=categories,title,date,excerpt,slug,sticky");
+        if (response.ok) { // ckeck if status code is 200
+          const payload = await response.json();
+          console.log(payload)
+          setPosts(payload);
+        } 
+      } catch (e) {
+        alert(e);
+      }
+    }
+
+    onLoad();
+  }, []);
+
+  function loadPosts() {
+
+  }
+
   return (
     <main>
       <MyJumbotron 
@@ -18,24 +42,19 @@ export default function Home() {
       ></MyJumbotron>
 
   	  <Row className="mb-2">
-  	    <Col md={6}>
-          <FeaturedPost
-            catagory = "Theory"
-            title = "A New Theory"
-            date = "Nov 15, 2019"
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mi lacus. Curabitur tempor laoreet urna ut sodales. Phasellus eleifend magna a purus congue varius. Phasellus vel fermentum orci. Quisque congue luctus metus, ut luctus diam ultrices at. In hac habitasse platea dictumst. Mauris quis lectus ac sapien scelerisque tincidunt."
-            link = "/theories/a-new-theory"
-          ></FeaturedPost>
-  	    </Col>
-  	    <Col md={6}>
-          <FeaturedPost
-            catagory = "Plato"
-            title = "Plato the Pythagorean"
-            date = "Nov 12, 2019"
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mi lacus. Curabitur tempor laoreet urna ut sodales. Phasellus eleifend magna a purus congue varius. Phasellus vel fermentum orci. Quisque congue luctus metus, ut luctus diam ultrices at. In hac habitasse platea dictumst. Mauris quis lectus ac sapien scelerisque tincidunt."
-            link = "/plato/plato-the-pythagorean"
-          ></FeaturedPost>
-  	    </Col>
+        {posts.length > 0
+          ? posts.filter(post => post.sticky).map((post, index) => 
+                <FeaturedPost
+                  key = {index}
+                  catagory = {post.categories[0]}
+                  title = {post.title.rendered}
+                  date = {post.date}
+                  text = {post.excerpt.rendered}
+                  link = {"/blog/" + post.slug}>
+                </FeaturedPost>
+              )
+          : null
+        }
   	  </Row>
 
 	    <Row>
@@ -43,45 +62,19 @@ export default function Home() {
 	        <h3 className="pb-3 my-4 font-italic border-bottom">
 	          Discourse
 	        </h3>
-          <SummaryPost
-            catagory = "Question"
-            title = "Bigger than Lybia and Asia?"
-            date = "Nov 11, 2019"
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mi lacus. Curabitur tempor laoreet urna ut sodales. Phasellus eleifend magna a purus congue varius. Phasellus vel fermentum orci. Quisque congue luctus metus, ut luctus diam ultrices at. In hac habitasse platea dictumst. Mauris quis lectus ac sapien scelerisque tincidunt."
-            link = "/question/bigger-than-lybia-asia"
-          ></SummaryPost>
-	        
-          <SummaryPost
-            catagory = "Theory"
-            title = "Was Atlantis in Spain?"
-            date = "Nov 9, 2019"
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mi lacus. Curabitur tempor laoreet urna ut sodales. Phasellus eleifend magna a purus congue varius. Phasellus vel fermentum orci. Quisque congue luctus metus, ut luctus diam ultrices at. In hac habitasse platea dictumst. Mauris quis lectus ac sapien scelerisque tincidunt."
-            link = "/theory/was-atlantis-in-spain"
-          ></SummaryPost>
-
-	        <SummaryPost
-            catagory = "Catastrophism"
-            title = "The History of Catastrophism"
-            date = "Nov 8, 2019"
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mi lacus. Curabitur tempor laoreet urna ut sodales. Phasellus eleifend magna a purus congue varius. Phasellus vel fermentum orci. Quisque congue luctus metus, ut luctus diam ultrices at. In hac habitasse platea dictumst. Mauris quis lectus ac sapien scelerisque tincidunt."
-            link = "/catastrophism/history-of-catastrophism"
-          ></SummaryPost>
-
-          <SummaryPost
-            catagory = "Plato"
-            title = "Who was Plato"
-            date = "Nov 6, 2019"
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mi lacus. Curabitur tempor laoreet urna ut sodales. Phasellus eleifend magna a purus congue varius. Phasellus vel fermentum orci. Quisque congue luctus metus, ut luctus diam ultrices at. In hac habitasse platea dictumst. Mauris quis lectus ac sapien scelerisque tincidunt."
-            link = "/plato/who-was-plato"
-          ></SummaryPost>
-
-          <SummaryPost
-            catagory = "Question"
-            title = "Did the Greeks know about the Americas?"
-            date = "Nov 3, 2019"
-            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mi lacus. Curabitur tempor laoreet urna ut sodales. Phasellus eleifend magna a purus congue varius. Phasellus vel fermentum orci. Quisque congue luctus metus, ut luctus diam ultrices at. In hac habitasse platea dictumst. Mauris quis lectus ac sapien scelerisque tincidunt."
-            link = "/question/did-greeks-know-about-americas"
-          ></SummaryPost>
+          {posts.length > 0
+            ? posts.filter(post => !post.sticky).map((post, index) => 
+                <SummaryPost
+                  key = {index}
+                  catagory = {post.categories[0]}
+                  title = {post.title.rendered}
+                  date = {post.date}
+                  text = {post.excerpt.rendered}
+                  link = {"/blog/" + post.slug}>
+                </SummaryPost>
+              )
+            : null
+          }
 
 	        <nav className="blog-pagination">
 	          <Link className="btn btn-outline-primary" to="#">Older</Link>
