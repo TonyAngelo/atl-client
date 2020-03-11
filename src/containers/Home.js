@@ -14,7 +14,7 @@ export default function Home() {
     async function onLoad() {
       try {
         //const payload = loadPosts();
-        const response = await fetch("http://api.atlantis.fyi/wp-json/wp/v2/posts?page=1&per_page=7&_fields=categories,title,date,excerpt,slug,sticky");
+        const response = await fetch("https://api.atlantis.fyi/wp-json/wp/v2/posts?page=1&per_page=7&_fields=categories,title,date,excerpt,slug,sticky");
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
           console.log(payload)
