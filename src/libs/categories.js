@@ -15,3 +15,12 @@ export const categoryNames = {
   5: 'Catastrophism',
   42: 'Question'
 }
+
+export const categoryNameColors = {
+	'Theory': 'text-primary',
+	'Source': 'text-success',
+	'Person': 'text-warning',
+	'Plato': 'text-info',
+	'Catastrophism': 'text-danger',
+	'Question': 'text-secondary'
+}

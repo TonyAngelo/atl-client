@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 //import { Card } from 'react-bootstrap';
 import { categoryColors, categoryNames } from "../libs/categories";
+import { months } from "../libs/dates";
 
 export default function SummaryPost({
   className = "",
@@ -17,12 +18,14 @@ export default function SummaryPost({
   if(disabled) {
     return null;
   }
-  
+
+  const myDate = new Date(date);
+
   return (
     <div className="blog-post">
       <strong className={"d-inline-block mb-2 " + categoryColors[catagory]}>{categoryNames[catagory]}</strong>
       <h2 className="blog-post-title">{title}</h2>
-      <p className="blog-post-meta">{date}</p>
+      <p className="blog-post-meta">{months[myDate.getMonth()] + " " + myDate.getDate() + ", " + myDate.getFullYear()}</p>
       <div dangerouslySetInnerHTML={{ __html: text }} />
       <div className="text-right"><Link to={link}>Continue reading</Link></div>
     </div>

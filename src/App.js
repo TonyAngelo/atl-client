@@ -5,9 +5,9 @@ import Routes from "./Routes";
 import './App.css';
 
 function App() {
-  const [headerCatagories, setHeaderCatagories] = useState([
+  const headerCatagories = [
     'Atlantis Finder', 'Questions', 'Theories', 'Sources', 'People', 'Plato', 'Catastrophism', 'About', 'Contact'
-  ]);
+  ];
 
   return (
     <div id="home">

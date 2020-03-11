@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Col, Card } from 'react-bootstrap';
 import { categoryColors, categoryNames } from "../libs/categories";
+import { months } from "../libs/dates";
 
 export default function FeaturedPost({
   className = "",
@@ -18,14 +19,7 @@ export default function FeaturedPost({
     return null;
   }
 
-  const catagoryColors = {
-    'Theory': 'text-primary',
-    'Source': 'text-success',
-    'Person': 'text-warning',
-    'Plato': 'text-info',
-    'Catastrophism': 'text-danger',
-    'Question': 'text-secondary'
-  }
+  const myDate = new Date(date);
   
   return (
     <Col md={6}>
@@ -35,7 +29,7 @@ export default function FeaturedPost({
           <h3 className="mb-0">
             <Link to={link} className="text-dark">{title}</Link>
           </h3>
-          <div className="mb-1 text-muted">{date}</div>
+          <div className="mb-1 text-muted">{months[myDate.getMonth()] + " " + myDate.getDate() + ", " + myDate.getFullYear()}</div>
           <div dangerouslySetInnerHTML={{ __html: text }} />
           <div className="text-right w-100 mt-2"><Link to={link}>Continue reading</Link></div>
         </div>
