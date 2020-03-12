@@ -6,12 +6,12 @@ import './App.css';
 
 function App() {
   const headerCatagories = [
-    'Atlantis Finder', 'Questions', 'Theories', 'Sources', 'People', 'Plato', 'Catastrophism', 'About', 'Contact'
+    'Dialogue', 'Theories', 'Sources', 'People', 'Plato', 'Catastrophism', 'Finder', 'About', 'Contact'
   ];
 
   return (
     <div id="home">
-      <Container>
+      <Container className="mb-4">
         <header className="blog-header py-3">
           <Row className="flex-nowrap justify-content-between align-items-center">
             <Col md={4} className="pt-1">
@@ -37,7 +37,6 @@ function App() {
         <Routes appProps={{ }} />
       </Container>
       <footer className="blog-footer">
-        <p></p>
         <p>
           <Link to="#home">Back to top</Link>
         </p>

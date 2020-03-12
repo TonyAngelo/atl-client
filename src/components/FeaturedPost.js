@@ -7,7 +7,7 @@ import { months } from "../libs/dates";
 export default function FeaturedPost({
   className = "",
   disabled = false,
-  catagory = "",
+  category = "",
   title = "",
   date = "",
   text = "",
@@ -25,7 +25,7 @@ export default function FeaturedPost({
     <Col md={6}>
       <Card className="flex-md-row mb-4 box-shadow">
         <div className="card-body d-flex flex-column align-items-start">
-          <strong className={"d-inline-block mb-2 " + categoryColors[catagory]}>{categoryNames[catagory]}</strong>
+          <strong className={"d-inline-block mb-2 " + categoryColors[category]}>{categoryNames[category]}</strong>
           <h3 className="mb-0">
             <Link to={link} className="text-dark">{title}</Link>
           </h3>

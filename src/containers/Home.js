@@ -83,7 +83,7 @@ export default function Home() {
           ? posts.filter(post => post.sticky).map((post, index) => 
                 <FeaturedPost
                   key = {index}
-                  catagory = {post.categories[0]}
+                  category = {post.categories[0]}
                   title = {post.title.rendered}
                   date = {post.date}
                   text = {post.excerpt.rendered}
@@ -99,12 +99,12 @@ export default function Home() {
         {posts.length > 0
 	        ? <Col md={8} className="blog-main">
     	        <h3 className="pb-3 my-4 font-italic border-bottom">
-    	          Discourse
+    	          Dialogue
     	        </h3>
               {posts.filter(post => !post.sticky).map((post, index) => 
                 <SummaryPost
                   key = {index}
-                  catagory = {post.categories[0]}
+                  category = {post.categories[0]}
                   title = {post.title.rendered}
                   date = {post.date}
                   text = {post.excerpt.rendered}
@@ -127,11 +127,11 @@ export default function Home() {
               {sideBar.map((item, index) => 
                 <SidebarPost
                   key = {index}
-                  catagory = {item.category[0].toUpperCase() + item.category.slice(1)}
+                  category = {item.category[0].toUpperCase() + item.category.slice(1)}
                   title = {item.title.rendered}
                   text = {item.excerpt.rendered}
                   link = {"/" + item.category + "/" + item.slug}>
-                ></SidebarPost>
+                </SidebarPost>
               )}
     	      </aside>
           : null

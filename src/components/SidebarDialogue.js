@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card } from 'react-bootstrap';
 import { categoryNameColors } from "../libs/categories";
 
-export default function SidebarPost({
+export default function SidebarDialogue({
   className = "",
   disabled = false,
   category = "",
@@ -27,7 +27,7 @@ export default function SidebarPost({
         <h4 className="mb-2">
           <Link to={link} className="text-dark">{title}</Link>
         </h4>
-        <div dangerouslySetInnerHTML={{ __html: text }} />
+        <p>{text}</p>
         <div className="text-right w-100 mt-2"><Link to={link}>{linkText}</Link></div>
       </div>
     </Card>

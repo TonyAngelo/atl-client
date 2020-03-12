@@ -7,7 +7,7 @@ import { months } from "../libs/dates";
 export default function SummaryPost({
   className = "",
   disabled = false,
-  catagory = "",
+  category = "",
   title = "",
   date = "",
   text = "",
@@ -23,7 +23,7 @@ export default function SummaryPost({
 
   return (
     <div className="blog-post">
-      <strong className={"d-inline-block mb-2 " + categoryColors[catagory]}>{categoryNames[catagory]}</strong>
+      <strong className={"d-inline-block mb-2 " + categoryColors[category]}>{categoryNames[category]}</strong>
       <h2 className="blog-post-title">{title}</h2>
       <p className="blog-post-meta">{months[myDate.getMonth()] + " " + myDate.getDate() + ", " + myDate.getFullYear()}</p>
       <div dangerouslySetInnerHTML={{ __html: text }} />
