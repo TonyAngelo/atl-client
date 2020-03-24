@@ -1,5 +1,10 @@
 /* stylelint-disable selector-list-comma-newline-after */
 
+.jumbotron {
+  background-image: url("https://images.unsplash.com/photo-1473163928189-364b2c4e1135?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-size: cover;
+}
+
 .blog-header {
   line-height: 1;
   border-bottom: 1px solid #e5e5e5;
@@ -16,6 +21,18 @@
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+.has-text-align-right {
+  text-align: right;
+}
+
+.has-text-align-center {
+  text-align: center;
+}
+
+.has-text-align-left {
+  text-align: left;
 }
 
 .display-4 {
@@ -52,6 +69,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: .875rem;
+}
+
+.nav-item {
+  cursor: pointer;
 }
 
 .flex-auto {

@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Jumbotron } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
+import { Jumbotron, Button } from 'react-bootstrap';
 
 export default function MyJumbotron({
   className = "",
@@ -16,10 +16,12 @@ export default function MyJumbotron({
   }
   
   return (
-    <Jumbotron className="p-3 p-md-5 text-white rounded bg-dark">
+    <Jumbotron className="p-3 p-md-5 text-white rounded">
       <h1 className="display-4 font-italic">{title}</h1>
       {text !== "" ? <p className="lead my-3">{text}</p> : null}
-      <p className="lead mb-0"><Link to={link} className="text-white font-weight-bold">{linkText}</Link></p>
+      <LinkContainer to={link}>
+        <Button className="lead text-white font-weight-bold">{linkText}</Button>
+      </LinkContainer>
     </Jumbotron>
   );
 }

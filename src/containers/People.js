@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
-import SidebarPost from "../components/SidebarPost";
+import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
 
 export default function People() {
@@ -28,26 +28,10 @@ export default function People() {
   }, []);
 
   return (
-    <main>
-      <Row className="my-4 text-center">
-        <Col>
-          <h1 className="my-2">People</h1>
-        </Col>
-	    </Row>
-      <Row>
-        {people.length > 0
-          ? people.map((item, index) =>
-              <Col key = {index} md={6} lg={4} xl={3}>
-                <SidebarPost
-                  title = {item.title.rendered}
-                  text = {item.excerpt.rendered}
-                  link = {"/people/" + item.slug}>
-                </SidebarPost>
-              </Col>
-            )
-          : null
-        }
-      </Row>
-	  </main>
+    <TiledPostPage
+      title = "People"
+      path = "person"
+      data = {people}
+    ></TiledPostPage>
   );
 }

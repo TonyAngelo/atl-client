@@ -46,7 +46,7 @@ export default function Plato() {
         </Col>
         <Col md={3}>
           <div className="p-3 mb-3 bg-light rounded">
-            <h4 className="font-italic">Selected dialogues</h4>
+            <h4 className="font-italic">Atlantis dialogues</h4>
           </div>
           {writing.map((item, index) => 
             <SidebarDialogue

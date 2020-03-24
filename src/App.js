@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Row, Col, Nav } from 'react-bootstrap';
 import Routes from "./Routes";
 import './App.css';
@@ -14,7 +15,7 @@ function App() {
       <Container className="mb-4">
         <header className="blog-header py-3">
           <Row className="flex-nowrap justify-content-between align-items-center">
-            <Col md={4} className="pt-1">
+            <Col md={4} className="d-none d-md-block pt-1">
               <p></p>
             </Col>
             <Col md={4} className="text-center">
@@ -28,9 +29,9 @@ function App() {
         <div className="nav-scroller py-1 mb-2">
           <Nav className="d-flex justify-content-between">
             {headerCatagories.map((item, index) => 
-              <Link key={index} to={"/" + item.toLowerCase().replace(' ', '-')} className="p-2 text-muted">
-                <Nav.Item>{item}</Nav.Item>
-              </Link>
+              <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}>
+                <Nav.Item className="p-2 text-muted">{item}</Nav.Item>
+              </LinkContainer>
             )}
           </Nav>
         </div>

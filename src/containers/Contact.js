@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import RegularPage from "../components/RegularPage";
 //import "./Home.css";
 
 export default function Contact() {
@@ -30,19 +29,9 @@ export default function Contact() {
   }, []);
 
   return (
-    <main>
-      <Row className="my-4 text-center">
-        <Col>
-          <h1 className="my-2">{title}</h1>
-        </Col>
-	    </Row>
-      <Row>
-        <Col md={3}></Col>
-        <Col md={6}>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-        </Col>
-        <Col md={3}></Col>
-      </Row>
-	  </main>
+    <RegularPage
+      title = {title}
+      content = {content}
+    ></RegularPage>
   );
 }

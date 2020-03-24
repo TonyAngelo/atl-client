@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
-import SidebarPost from "../components/SidebarPost";
+import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
 
 export default function Sources() {
-  const [source, setSource] = useState([]);
+  const [sources, setSources] = useState([]);
 
   const queryStr = "source?&_fields=title,excerpt,slug";
 
@@ -17,7 +17,7 @@ export default function Sources() {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          setSource(payload);
+          setSources(payload);
         } 
       } catch (e) {
         alert(e);
@@ -28,26 +28,10 @@ export default function Sources() {
   }, []);
 
   return (
-    <main>
-      <Row className="my-4 text-center">
-        <Col>
-          <h1 className="my-2">Sources</h1>
-        </Col>
-	    </Row>
-      <Row>
-        {source.length > 0
-          ? source.map((item, index) =>
-              <Col key = {index} md={6} lg={4} xl={3}>
-                <SidebarPost
-                  title = {item.title.rendered}
-                  text = {item.excerpt.rendered}
-                  link = {"/sources/" + item.slug}>
-                </SidebarPost>
-              </Col>
-            )
-          : null
-        }
-      </Row>
-	  </main>
+    <TiledPostPage
+      title = "Sources"
+      path = "sources"
+      data = {sources}
+    />
   );
 }
