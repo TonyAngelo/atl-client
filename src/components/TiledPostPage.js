@@ -24,13 +24,13 @@ export default function TiledPostPage({
           <h1 className="my-2">{title}</h1>
         </Col>
       </Row>
-      <TiledMdAdBanner></TiledMdAdBanner>
       <Row>
         <Col lg={10}>
           <Row>
             {data.length > 0
               ? data.map((item, index) =>
                   <Col key = {index} md={6}>
+                    {index === 1 || (index > 0 && index % 5 === 0) ? <TiledMdAdBanner></TiledMdAdBanner> : null}
                     <TiledPost
                       title = {xmlParse(item.title.rendered)}
                       text = {xmlParse(item.excerpt.rendered)}
