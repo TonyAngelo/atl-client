@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Button, Badge } from 'react-bootstrap';
+import { Row, Col, Button, Badge, ResponsiveEmbed } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import SidebarPost from "../components/SidebarPost";
 //import "./Home.css";
@@ -49,21 +49,23 @@ export default function Source(props) {
               {source[0].attachment
                 ? <Row className="my-4">
                     <Col>
-                      <div className="mb-2">
-                        <object width="100%" height="950px" data={'https://cdn.' + source[0].attachment.guid.substring(source[0].attachment.guid.search('api.')+4)} type="application/pdf"> 
-                          <p>It appears you don't have a PDF plugin for this browser.
-                           No biggie... you can <a href="resume.pdf">click here to
-                          download the PDF file.</a></p>  
-                        </object>
-                      </div>
-                      <div className="text-center">
-                        <a href={'https://cdn.' + source[0].attachment.guid.substring(source[0].attachment.guid.search('api.')+4)}>
-                          link to pdf file</a>
+                      <div className="my-2" style={{ width: '100%', height: 'auto' }}>
+                        <ResponsiveEmbed aspectRatio="1by1">
+                          <embed type={source[0].attachment.post_mime_type} src={'https://cdn.' + source[0].attachment.guid.substring(source[0].attachment.guid.search('api.')+4)} />
+                        </ResponsiveEmbed>
                       </div>
                     </Col>
                   </Row>
                 : null
               }
+              <Row className="mb-4">
+                <Col>
+                  {source[0].source_free === "1"
+                    ? <a href={source[0].source_link}>link to source</a>
+                    : <a href={source[0].source_link}>purchase link</a>
+                  }
+                </Col>
+              </Row>
             </Col>
             <Col lg={3}>
               {source[0].source_person

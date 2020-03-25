@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { apiHeader } from "../libs/api";
 import { LinkContainer } from 'react-router-bootstrap'
+import { apiHeader } from "../libs/api";
 import { Row, Col, Button } from 'react-bootstrap';
 import TiledPost from "../components/TiledPost";
 //import "./Home.css";
 
-export default function Finder() {
+export default function FinderReal() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [sources, setSources] = useState([]);
 
-  const queryStr = "question?slug=getting-started";
+  const queryStr = "question?slug=was-atlantis-real";
 
   useEffect(() => {
     async function onLoad() {
@@ -64,15 +64,23 @@ export default function Finder() {
       }
       </Row>
       <Row>
-        <Col md={3} className="d-none d-md-block">
+        <Col md={2} className="d-none d-md-block">
           <p></p>
         </Col>
-        <Col md={6}>
-          <LinkContainer to="/finder/real">
-            <Button className="my-4" block>Ready To Go</Button>
+        <Col md={3}>
+          <LinkContainer to="/finder/when">
+            <Button className="m-4" block>True Story</Button>
           </LinkContainer>
         </Col>
-        <Col md={3} className="d-none d-md-block">
+        <Col md={2} className="d-none d-md-block">
+          <p></p>
+        </Col>
+        <Col md={3}>
+          <LinkContainer to="/finder/meaning">
+            <Button className="m-4" block>Made-up Story</Button>
+          </LinkContainer>
+        </Col>
+        <Col md={2} className="d-none d-md-block">
           <p></p>
         </Col>
       </Row>

@@ -29,9 +29,7 @@ function App() {
         <div className="nav-scroller py-1 mb-2">
           <Nav className="d-flex justify-content-between">
             {headerCatagories.map((item, index) => 
-              <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}>
-                <Nav.Item className="p-2 text-muted">{item}</Nav.Item>
-              </LinkContainer>
+              <Nav.Link key={index} href={"/" + item.toLowerCase().replace(' ', '-')} className="p-2 text-muted">{item}</Nav.Link>
             )}
           </Nav>
         </div>
