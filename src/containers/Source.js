@@ -54,18 +54,18 @@ export default function Source(props) {
                           <embed type={source[0].attachment.post_mime_type} src={'https://cdn.' + source[0].attachment.guid.substring(source[0].attachment.guid.search('api.')+4)} />
                         </ResponsiveEmbed>
                       </div>
+                      <a href={source[0].attachment.guid}>link to pdf</a>
                     </Col>
                   </Row>
-                : null
+                : <Row className="mb-4">
+                    <Col>
+                      {source[0].source_free === "1"
+                        ? <a href={source[0].source_link}>link to source</a>
+                        : <a href={source[0].source_link}>purchase link</a>
+                      }
+                    </Col>
+                  </Row>
               }
-              <Row className="mb-4">
-                <Col>
-                  {source[0].source_free === "1"
-                    ? <a href={source[0].source_link}>link to source</a>
-                    : <a href={source[0].source_link}>purchase link</a>
-                  }
-                </Col>
-              </Row>
             </Col>
             <Col lg={3}>
               {source[0].source_person
