@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { HashLink as Link } from 'react-router-hash-link';
-import { Row, Col, Image } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import MyJumbotron from "../components/Jumbotron";
 import FeaturedPost from "../components/FeaturedPost";
 import SummaryPost from "../components/SummaryPost";
-import SidebarPost from "../components/SidebarPost";
-import BlogMdAdBanner from "../components/BlogMdAdBanner";
-import BlogSideAdBanner from "../components/BlogSideAdBanner";
 import { apiHeader } from "../libs/api";
 //import "./Home.css";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const [sideBar, setSideBar] = useState([]);
-
+  const jumboOn = false;
   const blogQuery = "?page=1&per_page=7&_fields=categories,title,date,excerpt,slug,sticky";
-  const sideBarQuery = "?page=1&per_page=1&_fields=categories,title,excerpt,slug";
+  //const sideBarQuery = "?page=1&per_page=1&_fields=categories,title,excerpt,slug";
 
   useEffect(() => {
     async function onLoad() {
-      //var asides = []
       // get posts
       try {
         const response = await fetch(apiHeader + "posts" + blogQuery);
@@ -30,56 +25,25 @@ export default function Home() {
       } catch (e) {
         alert(e);
       }
-      // // get sidebar, latest theory
-      // try {
-      //   const response = await fetch(apiHeader + "theory" + sideBarQuery);
-      //   if (response.ok) { // ckeck if status code is 200
-      //     const payload = await response.json();
-      //     payload[0].category = "theory"
-      //     asides.push(payload[0])
-      //   } 
-      // } catch (e) {
-      //   alert(e);
-      // }
-
-      // try {
-      //   const response = await fetch(apiHeader + "source" + sideBarQuery);
-      //   if (response.ok) { // ckeck if status code is 200
-      //     const payload = await response.json();
-      //     payload[0].category = "source"
-      //     asides.push(payload[0])
-      //   } 
-      // } catch (e) {
-      //   alert(e);
-      // }
-
-      // try {
-      //   const response = await fetch(apiHeader + "person" + sideBarQuery);
-      //   if (response.ok) { // ckeck if status code is 200
-      //     const payload = await response.json();
-      //     payload[0].category = "person"
-      //     asides.push(payload[0])
-      //   } 
-      // } catch (e) {
-      //   alert(e);
-      // }
-      
-      // setSideBar(asides);
     }
 
     onLoad();
-  }, []);
+  }, [blogQuery]);
 
   return (
     <main>
-
-      <MyJumbotron 
-        title = "The Atlantis Finder"
-        text = "A step by step decision tree that leads you to the location of Atlantis."
-        linkText = "Check it out!"
-        link = "/finder">
-      </MyJumbotron>
-
+      {jumboOn
+        ? <MyJumbotron 
+            title = "The Atlantis Finder"
+            text = "A step by step decision tree that leads you to the location of Atlantis."
+            linkText = "Check it out!"
+            link = "/finder" 
+          />
+        : <MyJumbotron 
+            title = "Atlantis FYI"
+            text = "A compendium of Atlantis information."
+          />
+      }
   	  <Row className="mb-2">
         {posts.length > 0
           ? posts.filter(post => post.sticky).map((post, index) => 
@@ -95,13 +59,10 @@ export default function Home() {
           : null
         }
   	  </Row>
-
-      <BlogMdAdBanner></BlogMdAdBanner>
-
 	    <Row>
-
+        <Col className="d-none d-lg-block" lg={1}></Col>
         {posts.length > 0
-	        ? <Col md={10} className="blog-main">
+	        ? <Col lg={10} className="blog-main">
     	        <h3 className="pb-3 my-4 font-italic border-bottom">
     	          Dialogue
     	        </h3>
@@ -122,9 +83,7 @@ export default function Home() {
     	      </Col>
           : null
         }
-
-	      <BlogSideAdBanner></BlogSideAdBanner>
-
+        <Col className="d-none d-lg-block" lg={1}></Col>
 	    </Row>
 	  </main>
   );

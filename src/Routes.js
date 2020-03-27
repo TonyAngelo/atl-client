@@ -6,9 +6,11 @@ import Blog from "./containers/Blog";
 import Finder from "./containers/Finder";
 import FinderReal from "./containers/FinderReal";
 import Theories from "./containers/Theories";
+import Theory from "./containers/Theory";
 import Sources from "./containers/Sources";
 import Source from "./containers/Source";
 import People from "./containers/People";
+import Person from "./containers/Person";
 import Plato from "./containers/Plato";
 import Contact from "./containers/Contact";
 import About from "./containers/About";
@@ -20,9 +22,11 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/" exact component={Home} appProps={appProps} />
       <AppliedRoute path="/dialogue" exact component={Blog} appProps={appProps} />
       <AppliedRoute path="/theories" exact component={Theories} appProps={appProps} />
+      <AppliedRoute path="/theories/:theory" exact component={Theory} appProps={appProps} />
       <AppliedRoute path="/sources" exact component={Sources} appProps={appProps} />
       <AppliedRoute path="/sources/:source" exact component={Source} appProps={appProps} />
       <AppliedRoute path="/people" exact component={People} appProps={appProps} />
+      <AppliedRoute path="/people/:person" exact component={Person} appProps={appProps} />
       <AppliedRoute path="/plato" exact component={Plato} appProps={appProps} />
       <AppliedRoute path="/finder" exact component={Finder} appProps={appProps} />
       <AppliedRoute path="/finder/real" exact component={FinderReal} appProps={appProps} />

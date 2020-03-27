@@ -2,8 +2,6 @@ import React from "react";
 import { Row, Col } from 'react-bootstrap';
 import { xmlParse } from "../libs/xml-parse";
 import TiledPost from "../components/TiledPost";
-import TiledMdAdBanner from "../components/TiledMdAdBanner";
-import TiledSideAdBanner from "../components/TiledSideAdBanner";
 
 export default function TiledPostPage({
   className = "",
@@ -25,12 +23,11 @@ export default function TiledPostPage({
         </Col>
       </Row>
       <Row>
-        <Col lg={10}>
+        <Col>
           <Row>
             {data.length > 0
               ? data.map((item, index) =>
-                  <Col key = {index} md={6}>
-                    {index === 1 || (index > 0 && index % 5 === 0) ? <TiledMdAdBanner></TiledMdAdBanner> : null}
+                  <Col key = {index} md={6} lg={4}>
                     <TiledPost
                       title = {xmlParse(item.title.rendered)}
                       text = {xmlParse(item.excerpt.rendered)}
@@ -42,9 +39,7 @@ export default function TiledPostPage({
             }
           </Row>
         </Col>
-        <TiledSideAdBanner></TiledSideAdBanner>
       </Row>
-      <TiledMdAdBanner></TiledMdAdBanner>
     </main>
   );
 }

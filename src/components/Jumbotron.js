@@ -19,9 +19,12 @@ export default function MyJumbotron({
     <Jumbotron className="p-3 p-md-5 text-white rounded">
       <h1 className="display-4 font-italic">{title}</h1>
       {text !== "" ? <p className="lead my-3">{text}</p> : null}
-      <LinkContainer to={link}>
-        <Button className="lead text-white font-weight-bold">{linkText}</Button>
-      </LinkContainer>
+      {link !== "" 
+        ? <LinkContainer to={link}>
+            <Button className="lead text-white font-weight-bold">{linkText}</Button>
+          </LinkContainer>
+        : null
+      }
     </Jumbotron>
   );
 }

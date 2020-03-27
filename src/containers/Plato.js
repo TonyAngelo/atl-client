@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import SidebarDialogue from "../components/SidebarDialogue";
-import TiledMdAdBanner from "../components/TiledMdAdBanner";
-import RegularSideAdBanner from "../components/RegularSideAdBanner";
 //import "./Home.css";
 
 export default function Plato() {
@@ -43,7 +40,7 @@ export default function Plato() {
     }
 
     onLoad();
-  }, []);
+  }, [queryStr]);
 
   return (
     <main>
@@ -53,13 +50,10 @@ export default function Plato() {
         </Col>
 	    </Row>
       <Row>
-        <Col className="d-none d-lg-block" lg={1}></Col>
-        <Col md={8} lg={7}>
+        <Col md={8}>
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </Col>
-        <Col className="d-none d-lg-block" lg={1}></Col>
-        <Col md={4} lg={3}>
-          <TiledMdAdBanner></TiledMdAdBanner>
+        <Col md={4}>
           <div className="p-3 mb-3 bg-light rounded">
             <h4 className="font-italic">Atlantis dialogues</h4>
           </div>
@@ -72,7 +66,6 @@ export default function Plato() {
               linkText = "Go to dialogue">
             </SidebarDialogue>
           )}
-          <TiledMdAdBanner></TiledMdAdBanner>
           <div className="p-3 mb-3 bg-light rounded">
             <h4 className="font-italic">Related Sources</h4>
           </div>
@@ -87,7 +80,6 @@ export default function Plato() {
           )}
         </Col>
       </Row>
-      <TiledMdAdBanner></TiledMdAdBanner>
 	  </main>
   );
 }

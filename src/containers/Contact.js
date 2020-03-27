@@ -4,21 +4,17 @@ import RegularPage from "../components/RegularPage";
 //import "./Home.css";
 
 export default function Contact() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  const queryStr = "pages?slug=contact&_fields=title,content,date";
+  const [data, setData] = useState({});
+  const queryStr = "pages?slug=contact&_embed";
 
   useEffect(() => {
     async function onLoad() {
-      // get page content
       try {
         const response = await fetch(apiHeader + queryStr);
-        if (response.ok) { // ckeck if status code is 200
+        if (response.ok) { 
           const payload = await response.json();
-          console.log(payload)
-          setTitle(payload[0].title.rendered);
-          setContent(payload[0].content.rendered);
+          //console.log(payload)
+          setData(payload[0]);
         } 
       } catch (e) {
         alert(e);
@@ -30,8 +26,7 @@ export default function Contact() {
 
   return (
     <RegularPage
-      title = {title}
-      content = {content}
-    ></RegularPage>
+      data = {data}
+    />
   );
 }

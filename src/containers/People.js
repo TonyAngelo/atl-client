@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
@@ -8,7 +6,7 @@ import TiledPostPage from "../components/TiledPostPage";
 export default function People() {
   const [people, setPeople] = useState([]);
 
-  const queryStr = "person?&_fields=title,excerpt,slug";
+  const queryStr = "person?&order=asc&page=1&per_page=100&exclude=100&_fields=title,excerpt,slug";
 
   useEffect(() => {
     async function onLoad() {
@@ -30,8 +28,8 @@ export default function People() {
   return (
     <TiledPostPage
       title = "People"
-      path = "person"
+      path = "people"
       data = {people}
-    ></TiledPostPage>
+    />
   );
 }

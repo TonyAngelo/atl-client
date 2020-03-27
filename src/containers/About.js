@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
 import RegularPage from "../components/RegularPage";
+import { cdnRewrite } from "../libs/cdn-rewrite";
 //import "./Home.css";
 
 export default function About() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  const queryStr = "pages?slug=about&_fields=title,content,date";
+  const [data, setData] = useState({});
+  const queryStr = "pages?slug=about&_embed";
 
   useEffect(() => {
     async function onLoad() {
-      // get page content
       try {
         const response = await fetch(apiHeader + queryStr);
-        if (response.ok) { // ckeck if status code is 200
+        if (response.ok) { 
           const payload = await response.json();
-          console.log(payload)
-          setTitle(payload[0].title.rendered);
-          setContent(payload[0].content.rendered);
+          //console.log(payload)
+          setData(payload[0]);
         } 
       } catch (e) {
         alert(e);
@@ -30,8 +27,7 @@ export default function About() {
 
   return (
     <RegularPage
-      title = {title}
-      content = {content}
-    ></RegularPage>
+      data = {data}
+    />
   );
 }
