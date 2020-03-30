@@ -27,7 +27,7 @@ export default function FeaturedPost({
         <div className="card-body d-flex flex-column align-items-start">
           <strong className={"d-inline-block mb-2 " + categoryColors[category]}>{categoryNames[category]}</strong>
           <h3 className="mb-0">
-            <Link to={link} className="text-dark">{title}</Link>
+            <Link to={link} className="text-dark"><div dangerouslySetInnerHTML={{ __html: title }} /></Link>
           </h3>
           <div className="mb-1 text-muted">{months[myDate.getMonth()] + " " + myDate.getDate() + ", " + myDate.getFullYear()}</div>
           <div dangerouslySetInnerHTML={{ __html: text }} />

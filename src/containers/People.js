@@ -4,9 +4,8 @@ import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
 
 export default function People() {
-  const [people, setPeople] = useState([]);
-
-  const queryStr = "person?&order=asc&page=1&per_page=100&exclude=100&_fields=title,excerpt,slug";
+  const [data, setData] = useState([]);
+  let queryStr = "person?&order=asc&page=1&per_page=100&exclude=100&_embed";
 
   useEffect(() => {
     async function onLoad() {
@@ -15,7 +14,8 @@ export default function People() {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          setPeople(payload);
+          console.log(payload);
+          setData(payload);
         } 
       } catch (e) {
         alert(e);
@@ -23,13 +23,13 @@ export default function People() {
     }
 
     onLoad();
-  }, []);
+  }, [queryStr]);
 
   return (
     <TiledPostPage
       title = "People"
       path = "people"
-      data = {people}
+      data = {data}
     />
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Figure } from 'react-bootstrap';
 import { cdnRewrite } from "../libs/cdn-rewrite";
+import PageTitle from "../components/PageTitle";
 
 export default function RegularPage({
   className = "",
@@ -23,11 +24,7 @@ export default function RegularPage({
           </Figure>
         : null
       }
-      <Row className="my-4 text-center">
-        <Col>
-          <h1 className="my-2">{data.title.rendered}</h1>
-        </Col>
-      </Row>
+      <PageTitle>{data.title.rendered}</PageTitle>
       <Row>
         <Col className="d-none d-lg-block" lg={1}></Col>
         <Col lg={10}>

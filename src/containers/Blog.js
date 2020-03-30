@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
-import SummaryPost from "../components/SummaryPost";
 import { apiHeader } from "../libs/api";
+import PageTitle from "../components/PageTitle";
+import SummaryPost from "../components/SummaryPost";
+
 //import "./Home.css";
 
 export default function Blog() {
   const [posts, setPosts] = useState([]);
 
-  const blogQuery = "?page=1&per_page=100&_fields=categories,title,date,excerpt,slug,sticky";
+  let blogQuery = "?page=1&per_page=100&_fields=categories,title,date,excerpt,slug,sticky";
 
   useEffect(() => {
     async function onLoad() {
@@ -29,11 +31,7 @@ export default function Blog() {
 
   return (
     <main>
-      <Row className="my-4 text-center">
-        <Col>
-          <h1 className="my-2">Dialogue</h1>
-        </Col>
-      </Row>
+      <PageTitle>Dialogue</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={1}></Col>
         {posts.length > 0

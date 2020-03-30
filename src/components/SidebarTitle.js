@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 //import "./PageTitle.css";
 
-export default function PageTitle({
+export default function SidebarTitle({
   isLoading,
   className = "",
   disabled = false,
@@ -12,10 +12,8 @@ export default function PageTitle({
     return null;
   }
   return (
-    <Row className={`my-4 text-center ${className}`}>
-      <Col>
-        <h1 dangerouslySetInnerHTML={{ __html: props.children }} />
-      </Col>
-    </Row>
+    <div className={`p-3 mb-3 bg-secondary rounded text-center ${className}`}>
+      <h4 className="font-italic text-white" dangerouslySetInnerHTML={{ __html: props.children }} />
+    </div>
   );
 }

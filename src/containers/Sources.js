@@ -4,9 +4,8 @@ import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
 
 export default function Sources() {
-  const [sources, setSources] = useState([]);
-
-  const queryStr = "source?&order=asc&page=1&per_page=100&_fields=title,excerpt,slug";
+  const [data, setData] = useState([]);
+  let queryStr = "source?&order=asc&page=1&per_page=100&_embed";
 
   useEffect(() => {
     async function onLoad() {
@@ -16,7 +15,7 @@ export default function Sources() {
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
           console.log(payload);
-          setSources(payload);
+          setData(payload);
         } 
       } catch (e) {
         alert(e);
@@ -24,13 +23,13 @@ export default function Sources() {
     }
 
     onLoad();
-  }, []);
+  }, [queryStr]);
 
   return (
     <TiledPostPage
       title = "Sources"
       path = "sources"
-      data = {sources}
+      data = {data}
     />
   );
 }

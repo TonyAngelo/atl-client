@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from 'react-bootstrap';
 import { xmlParse } from "../libs/xml-parse";
+import PageTitle from "../components/PageTitle";
 import TiledPost from "../components/TiledPost";
 
 export default function TiledPostPage({
@@ -17,11 +18,7 @@ export default function TiledPostPage({
   
   return (
     <main>
-      <Row className="my-4 text-center">
-        <Col>
-          <h1 className="my-2">{title}</h1>
-        </Col>
-      </Row>
+      <PageTitle>{title}</PageTitle>
       <Row>
         <Col>
           <Row>
@@ -29,8 +26,8 @@ export default function TiledPostPage({
               ? data.map((item, index) =>
                   <Col key = {index} md={6} lg={4}>
                     <TiledPost
-                      title = {xmlParse(item.title.rendered)}
-                      text = {xmlParse(item.excerpt.rendered)}
+                      title = {item.title.rendered}
+                      text = {item.excerpt.rendered}
                       link = {"/" + path + "/" + item.slug}>
                     </TiledPost>
                   </Col>

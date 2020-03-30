@@ -4,9 +4,8 @@ import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
 
 export default function Theories() {
-  const [theories, setTheories] = useState([]);
-
-  const queryStr = "theory?&order=asc&page=1&per_page=100&_fields=title,excerpt,slug";
+  const [data, setData] = useState([]);
+  let queryStr = "theory?_embed&order=asc&page=1&per_page=100";
 
   useEffect(() => {
     async function onLoad() {
@@ -15,7 +14,8 @@ export default function Theories() {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          setTheories(payload);
+          console.log(payload);
+          setData(payload);
         } 
       } catch (e) {
         alert(e);
@@ -23,13 +23,13 @@ export default function Theories() {
     }
 
     onLoad();
-  }, []);
+  }, [queryStr]);
 
   return (
     <TiledPostPage
       title = "Theories"
       path = "theories"
-      data = {theories}
+      data = {data}
     />
   );
 }

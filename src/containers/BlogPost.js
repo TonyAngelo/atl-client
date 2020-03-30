@@ -3,12 +3,14 @@ import { Row, Col, Figure } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
+import FeaturedImage from "../components/FeaturedImage";
+import BlogContent from "../components/BlogContent";
 import SidebarSection from "../components/SidebarSection";
 //import "./Home.css";
 
-export default function Person(props) {
+export default function BlogPost(props) {
   const [data, setData] = useState([]);
-  let queryStr = `person?&_embedslug=${props.match.params.person}`;
+  let queryStr = `posts?slug=${props.match.params.post}&_embed`;
   
   useEffect(() => {
     async function onLoad() {
@@ -40,20 +42,27 @@ export default function Person(props) {
                 />
               </Col>
               <Col lg={4}>
-                {data[0].writing
+                {data[0].post_theories
                   ? <SidebarSection
-                      data = {data[0].writing}
+                      data = {data[0].post_theories}
+                      titleSingle = "Theory"
+                      titleMultiple = "Theories"
+                    />
+                  : null
+                }
+                {data[0].post_sources
+                  ? <SidebarSection
+                      data = {data[0].post_sources}
                       titleSingle = "Source"
                       titleMultiple = "Sources"
                     />
                   : null
                 }
-                {data[0].person_posts
+                {data[0].post_people
                   ? <SidebarSection
-                      data = {data[0].person_posts}
-                      titleSingle = "Post"
-                      titleMultiple = "Posts"
-                      linkPath = "blog"
+                      data = {data[0].post_people}
+                      titleSingle = "Person"
+                      titleMultiple = "People"
                     />
                   : null
                 }

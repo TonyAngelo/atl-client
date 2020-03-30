@@ -10,7 +10,7 @@ export default function Plato() {
   const [writing, setWriting] = useState([]);
   const [atlantis, setAtlantis]= useState([]);
 
-  const queryStr = "person?slug=plato&_fields=title,content,writing";
+  const queryStr = "person?_embed&slug=plato&order=asc";
 
   useEffect(() => {
     async function onLoad() {
@@ -62,7 +62,7 @@ export default function Plato() {
               key = {index}
               title = {item.post_title}
               text = {item.post_excerpt}
-              link = {"/source/" + item.post_name}
+              link = {"/sources/" + item.post_name}
               linkText = "Go to dialogue">
             </SidebarDialogue>
           )}
@@ -74,7 +74,7 @@ export default function Plato() {
               key = {index}
               title = {item.post_title}
               text = {item.post_excerpt}
-              link = {"/source/" + item.post_name}
+              link = {"/sources/" + item.post_name}
               linkText = "Go to source">
             </SidebarDialogue>
           )}

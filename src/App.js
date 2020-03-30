@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   const headerCatagories = [
-    'Dialogue', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
+    'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
   ];
 
   return (
