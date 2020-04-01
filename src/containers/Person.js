@@ -8,8 +8,8 @@ import SidebarSection from "../components/SidebarSection";
 
 export default function Person(props) {
   const [data, setData] = useState([]);
-  let queryStr = `person?&_embedslug=${props.match.params.person}`;
-  
+  let queryStr = `person?&_embed&slug=${props.match.params.person}`;
+
   useEffect(() => {
     async function onLoad() {
       // get page content
