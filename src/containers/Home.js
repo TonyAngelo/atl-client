@@ -7,7 +7,7 @@ import SummaryPost from "../components/SummaryPost";
 import { apiHeader } from "../libs/api";
 //import "./Home.css";
 
-export default function Home() {
+export default function Home(props) {
   const [sticky, setSticky] = useState([]);
   const [posts, setPosts] = useState([]);
   const jumboOn = false;
@@ -17,6 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       // get sticky
       try {
         const response = await fetch(apiHeader + "posts" + stickyQuery);
@@ -43,6 +44,7 @@ export default function Home() {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();

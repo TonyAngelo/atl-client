@@ -12,6 +12,7 @@ export default function Person(props) {
 
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       // get page content
       try {
         const response = await fetch(apiHeader + queryStr);
@@ -23,6 +24,7 @@ export default function Person(props) {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();
@@ -30,36 +32,34 @@ export default function Person(props) {
 
   return (
     <main>
+      <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
-        ? <div>
-            <PageTitle>{data[0].title.rendered}</PageTitle>
-            <Row>
-              <Col lg={8}>
-                <BlogSection
-                  data={data[0]}
-                />
-              </Col>
-              <Col lg={4}>
-                {data[0].writing
-                  ? <SidebarSection
-                      data = {data[0].writing}
-                      titleSingle = "Source"
-                      titleMultiple = "Sources"
-                    />
-                  : null
-                }
-                {data[0].person_posts
-                  ? <SidebarSection
-                      data = {data[0].person_posts}
-                      titleSingle = "Post"
-                      titleMultiple = "Posts"
-                      linkPath = "blog"
-                    />
-                  : null
-                }
-              </Col>
-            </Row>
-          </div>
+        ? <Row>
+            <Col lg={8}>
+              <BlogSection
+                data={data[0]}
+              />
+            </Col>
+            <Col lg={4}>
+              {data[0].writing
+                ? <SidebarSection
+                    data = {data[0].writing}
+                    titleSingle = "Source"
+                    titleMultiple = "Sources"
+                  />
+                : null
+              }
+              {data[0].person_posts
+                ? <SidebarSection
+                    data = {data[0].person_posts}
+                    titleSingle = "Post"
+                    titleMultiple = "Posts"
+                    linkPath = "blog"
+                  />
+                : null
+              }
+            </Col>
+          </Row>
         : null
       }
     </main>

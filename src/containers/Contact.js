@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
+import PageTitle from "../components/PageTitle";
 import RegularPage from "../components/RegularPage";
 //import "./Home.css";
 
-export default function Contact() {
+export default function Contact(props) {
   const [data, setData] = useState({});
   const queryStr = "pages?slug=contact&_embed";
 
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       try {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { 
@@ -19,14 +21,18 @@ export default function Contact() {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();
   }, []);
 
   return (
-    <RegularPage
-      data = {data}
-    />
+    <main>
+      <PageTitle loaded={props.isLoaded}>Contact</PageTitle>
+      <RegularPage
+        data = {data}
+      />
+    </main>
   );
 }

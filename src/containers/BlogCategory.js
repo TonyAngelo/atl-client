@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import { categoryIDs, categoryNames } from "../libs/categories";
 import PageTitle from "../components/PageTitle";
 import SummaryPost from "../components/SummaryPost";
 
 //import "./Home.css";
 
-export default function Blog(props) {
+export default function BlogCategory(props) {
   const [posts, setPosts] = useState([]);
 
-  let blogQuery = "?page=1&per_page=100&_fields=categories,title,date,excerpt,slug,sticky";
+  let blogQuery = `?categories=${categoryIDs[props.match.params.category]}&page=1&per_page=20&_fields=title,date,excerpt,slug`;
 
   useEffect(() => {
     async function onLoad() {
@@ -33,7 +34,7 @@ export default function Blog(props) {
 
   return (
     <main>
-      <PageTitle loaded={props.isLoaded}>Dialogue</PageTitle>
+      <PageTitle loaded={props.isLoaded}>{"Category: " + categoryNames[categoryIDs[props.match.params.category]]}</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={1}></Col>
         {posts.length > 0
@@ -42,7 +43,6 @@ export default function Blog(props) {
                 <SummaryPost
                   key = {index}
                   index = {index}
-                  category = {post.categories[0]}
                   title = {post.title.rendered}
                   date = {post.date}
                   text = {post.excerpt.rendered}

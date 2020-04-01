@@ -20,7 +20,7 @@ export default function BlogMeta({
   const myEdit = new Date(edited);
 
   return (
-    <p className="font-italic blog-post-meta">
+    <p className="ml-4 font-italic blog-post-meta">
       by {author}
       <br/>
       Published {months[myDate.getMonth()] + " " + myDate.getDate() + ", " + myDate.getFullYear()} 

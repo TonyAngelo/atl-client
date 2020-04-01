@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import PageTitle from "../components/PageTitle";
 import SidebarDialogue from "../components/SidebarDialogue";
 //import "./Home.css";
 
-export default function Plato() {
+export default function Plato(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [writing, setWriting] = useState([]);
@@ -14,6 +15,7 @@ export default function Plato() {
 
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       let atlItems = [];
       let otherItems = [];
       // get page content
@@ -37,6 +39,7 @@ export default function Plato() {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();
@@ -44,11 +47,7 @@ export default function Plato() {
 
   return (
     <main>
-      <Row className="my-4 text-center">
-        <Col>
-          <h1 className="my-2">{title}</h1>
-        </Col>
-	    </Row>
+      <PageTitle loaded={props.isLoaded}>{title}</PageTitle>
       <Row>
         <Col md={8}>
           <div dangerouslySetInnerHTML={{ __html: content }} />

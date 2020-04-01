@@ -10,6 +10,7 @@ export default function BlogSection({
   isLoading,
   className = "",
   disabled = false,
+  meta = true,
   data = {},
   ...props
 }) {
@@ -26,16 +27,22 @@ export default function BlogSection({
               />
             : null
           }
-          <BlogMeta 
-            date={data.date}
-            edited={data.modified}
-            author="Tony Petrangelo"
-          />
+          {meta
+            ? <BlogMeta 
+                date={data.date}
+                edited={data.modified}
+                author="Tony Petrangelo"
+              />
+            : null
+          }
           <BlogContent>{data.content.rendered}</BlogContent>
-          <BlogFooter 
-            category={data['_embedded']['wp:term'][0][0]}
-            tags={data['_embedded']['wp:term'][1]}
-          />
+          {meta
+            ? <BlogFooter 
+                category={data['_embedded']['wp:term'][0][0]}
+                tags={data['_embedded']['wp:term'][1]}
+              />
+            : null
+          }
         </Col>
       </Row>
   );

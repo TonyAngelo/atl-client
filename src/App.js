@@ -6,6 +6,7 @@ import Routes from "./Routes";
 import './App.css';
 
 function App() {
+  const [isLoaded, setIsLoaded] = useState([]);
   const headerCatagories = [
     'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
   ];
@@ -33,7 +34,7 @@ function App() {
             )}
           </Nav>
         </div>
-        <Routes appProps={{ }} />
+        <Routes appProps={{ isLoaded, setIsLoaded }} />
       </Container>
       <footer className="blog-footer">
         <p>

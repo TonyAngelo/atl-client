@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
+import PageTitle from "../components/PageTitle";
 import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
 
-export default function People() {
+export default function People(props) {
   const [data, setData] = useState([]);
   let queryStr = "person?&order=asc&page=1&per_page=100&exclude=100&_embed";
 
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       // get page content
       try {
         const response = await fetch(apiHeader + queryStr);
@@ -20,16 +22,19 @@ export default function People() {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();
   }, [queryStr]);
 
   return (
-    <TiledPostPage
-      title = "People"
-      path = "people"
-      data = {data}
-    />
+    <main>
+      <PageTitle loaded={props.isLoaded}>People</PageTitle>
+      <TiledPostPage
+        path = "people"
+        data = {data}
+      />
+    </main>
   );
 }

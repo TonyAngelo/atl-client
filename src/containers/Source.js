@@ -13,6 +13,7 @@ export default function Source(props) {
   
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       // get page content
       try {
         const response = await fetch(apiHeader + queryStr);
@@ -24,6 +25,7 @@ export default function Source(props) {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();
@@ -31,61 +33,60 @@ export default function Source(props) {
 
   return (
     <main>
+      <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
-        ? <div>
-            <PageTitle>{data[0].title.rendered}</PageTitle>
-            <Row>
-              <Col lg={8}>
-                <BlogSection
-                  data={data[0]}
-                />
-                {data[0].attachment
-                ? <Row className="my-4">
-                    <Col>
-                      <div className="my-2" style={{ width: '100%', height: 'auto' }}>
-                        <ResponsiveEmbed aspectRatio="1by1">
-                          <embed type={data[0].attachment.post_mime_type} src={cdnRewrite(data[0].attachment.guid)} />
-                        </ResponsiveEmbed>
-                      </div>
-                      <a href={cdnRewrite(data[0].attachment.guid)}>link to pdf</a>
-                    </Col>
-                  </Row>
-                : <Row className="mb-4">
-                    <Col>
-                      <a href={data[0].source_link}>link to source</a>
-                    </Col>
-                  </Row>
+        ? <Row>
+            <Col lg={8}>
+              <BlogSection
+                meta={false}
+                data={data[0]}
+              />
+              {data[0].attachment
+              ? <Row className="my-4">
+                  <Col>
+                    <div className="my-2" style={{ width: '100%', height: 'auto' }}>
+                      <ResponsiveEmbed aspectRatio="1by1">
+                        <embed type={data[0].attachment.post_mime_type} src={cdnRewrite(data[0].attachment.guid)} />
+                      </ResponsiveEmbed>
+                    </div>
+                    <a href={cdnRewrite(data[0].attachment.guid)}>link to pdf</a>
+                  </Col>
+                </Row>
+              : <Row className="mb-4">
+                  <Col>
+                    <a href={data[0].source_link}>link to source</a>
+                  </Col>
+                </Row>
+            }
+            </Col>
+            <Col lg={4}>
+              {data[0].source_person
+                ? <SidebarSection
+                    data = {data[0].source_person}
+                    titleSingle = "Person"
+                    titleMultiple = "People"
+                  />
+                : null
               }
-              </Col>
-              <Col lg={4}>
-                {data[0].source_person
-                  ? <SidebarSection
-                      data = {data[0].source_person}
-                      titleSingle = "Person"
-                      titleMultiple = "People"
-                    />
-                  : null
-                }
-                {data[0].source_theory
-                  ? <SidebarSection
-                      data = {data[0].source_theory}
-                      titleSingle = "Theory"
-                      titleMultiple = "Theories"
-                    />
-                  : null
-                }
-                {data[0].source_posts
-                  ? <SidebarSection
-                      data = {data[0].source_posts}
-                      titleSingle = "Post"
-                      titleMultiple = "Posts"
-                      linkPath = "blog"
-                    />
-                  : null
-                }
-              </Col>
-            </Row>
-          </div>
+              {data[0].source_theory
+                ? <SidebarSection
+                    data = {data[0].source_theory}
+                    titleSingle = "Theory"
+                    titleMultiple = "Theories"
+                  />
+                : null
+              }
+              {data[0].source_posts
+                ? <SidebarSection
+                    data = {data[0].source_posts}
+                    titleSingle = "Post"
+                    titleMultiple = "Posts"
+                    linkPath = "blog"
+                  />
+                : null
+              }
+            </Col>
+          </Row>
         : null
       }
     </main>

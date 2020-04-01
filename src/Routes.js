@@ -4,6 +4,8 @@ import AppliedRoute from "./components/AppliedRoute";
 import Home from "./containers/Home";
 import Blog from "./containers/Blog";
 import BlogPost from "./containers/BlogPost";
+import BlogCategory from "./containers/BlogCategory";
+import BlogTag from "./containers/BlogTag";
 import Finder from "./containers/Finder";
 import FinderReal from "./containers/FinderReal";
 import Theories from "./containers/Theories";
@@ -22,6 +24,8 @@ export default function Routes({ appProps }) {
     <Switch>
       <AppliedRoute path="/" exact component={Home} appProps={appProps} />
       <AppliedRoute path="/blog" exact component={Blog} appProps={appProps} />
+      <AppliedRoute path="/blog/category/:category" exact component={BlogCategory} appProps={appProps} />
+      <AppliedRoute path="/blog/tag/:tag" exact component={BlogTag} appProps={appProps} />
       <AppliedRoute path="/blog/:post" exact component={BlogPost} appProps={appProps} />
       <AppliedRoute path="/theories" exact component={Theories} appProps={appProps} />
       <AppliedRoute path="/theories/:theory" exact component={Theory} appProps={appProps} />

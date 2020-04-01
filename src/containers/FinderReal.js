@@ -5,7 +5,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 import TiledPost from "../components/TiledPost";
 //import "./Home.css";
 
-export default function FinderReal() {
+export default function FinderReal(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [sources, setSources] = useState([]);
@@ -14,6 +14,7 @@ export default function FinderReal() {
 
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       //get page content
       try {
         const response = await fetch(apiHeader + queryStr);
@@ -27,6 +28,7 @@ export default function FinderReal() {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
+import PageTitle from "../components/PageTitle";
 import RegularPage from "../components/RegularPage";
 import { cdnRewrite } from "../libs/cdn-rewrite";
 //import "./Home.css";
 
-export default function About() {
+export default function About(props) {
   const [data, setData] = useState({});
   const queryStr = "pages?slug=about&_embed";
 
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       try {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { 
@@ -20,14 +22,18 @@ export default function About() {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();
   }, []);
 
   return (
-    <RegularPage
-      data = {data}
-    />
+    <main>
+      <PageTitle loaded={props.isLoaded}>About</PageTitle>
+      <RegularPage
+        data = {data}
+      />
+    </main>
   );
 }

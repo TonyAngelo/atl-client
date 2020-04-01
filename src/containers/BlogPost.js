@@ -14,6 +14,7 @@ export default function BlogPost(props) {
   
   useEffect(() => {
     async function onLoad() {
+      props.setIsLoaded(false);
       // get page content
       try {
         const response = await fetch(apiHeader + queryStr);
@@ -25,6 +26,7 @@ export default function BlogPost(props) {
       } catch (e) {
         alert(e);
       }
+      props.setIsLoaded(true);
     }
 
     onLoad();
@@ -32,43 +34,41 @@ export default function BlogPost(props) {
 
   return (
     <main>
+      <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
-        ? <div>
-            <PageTitle>{data[0].title.rendered}</PageTitle>
-            <Row>
-              <Col lg={8}>
-                <BlogSection
-                  data={data[0]}
-                />
-              </Col>
-              <Col lg={4}>
-                {data[0].post_theories
-                  ? <SidebarSection
-                      data = {data[0].post_theories}
-                      titleSingle = "Theory"
-                      titleMultiple = "Theories"
-                    />
-                  : null
-                }
-                {data[0].post_sources
-                  ? <SidebarSection
-                      data = {data[0].post_sources}
-                      titleSingle = "Source"
-                      titleMultiple = "Sources"
-                    />
-                  : null
-                }
-                {data[0].post_people
-                  ? <SidebarSection
-                      data = {data[0].post_people}
-                      titleSingle = "Person"
-                      titleMultiple = "People"
-                    />
-                  : null
-                }
-              </Col>
-            </Row>
-          </div>
+        ? <Row>
+            <Col lg={8}>
+              <BlogSection
+                data={data[0]}
+              />
+            </Col>
+            <Col lg={4}>
+              {data[0].post_theories
+                ? <SidebarSection
+                    data = {data[0].post_theories}
+                    titleSingle = "Theory"
+                    titleMultiple = "Theories"
+                  />
+                : null
+              }
+              {data[0].post_sources
+                ? <SidebarSection
+                    data = {data[0].post_sources}
+                    titleSingle = "Source"
+                    titleMultiple = "Sources"
+                  />
+                : null
+              }
+              {data[0].post_people
+                ? <SidebarSection
+                    data = {data[0].post_people}
+                    titleSingle = "Person"
+                    titleMultiple = "People"
+                  />
+                : null
+              }
+            </Col>
+          </Row>
         : null
       }
     </main>

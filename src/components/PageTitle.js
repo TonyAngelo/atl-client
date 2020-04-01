@@ -6,10 +6,20 @@ export default function PageTitle({
   isLoading,
   className = "",
   disabled = false,
+  loaded = false,
   ...props
 }) {
   if(disabled || isLoading) {
     return null;
+  }
+  if(loaded === false) {
+    return (
+      <div className="mt-4 d-flex justify-content-center">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    )
   }
   return (
     <Row className={`my-4 text-center ${className}`}>
