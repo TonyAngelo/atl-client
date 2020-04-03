@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
+import { withRouter } from "react-router-dom";
 import { HashLink as Link } from 'react-router-hash-link';
 import { LinkContainer } from 'react-router-bootstrap'
-import { Container, Row, Col, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Routes from "./Routes";
 import './App.css';
 
-function App() {
+function App(props) {
   const [isLoaded, setIsLoaded] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
+  const [search, setSearch] = useState("");
   const headerCatagories = [
     'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
   ];
+
+  async function handleSearchSubmit(e) {
+    e.preventDefault();
+    console.log(search);
+    setShowSearch(false);
+    props.history.push("/search/" + search);
+  }
 
   return (
     <div id="home">
@@ -23,7 +33,32 @@ function App() {
               <Link className="blog-header-logo text-dark" to="/">Atlantis FYI</Link>
             </Col>
             <Col md={4} className="d-flex justify-content-end align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+                {showSearch
+                  ? <Form inline>
+                      <Form.Group controlId="formSearch">
+                        <FormControl 
+                          value={search}
+                          onChange={e => setSearch(e.target.value)}
+                          onKeyPress={e => {
+                            if (e.key === "Enter") {
+                              handleSearchSubmit(e);
+                            }
+                          }}
+                          size="sm" 
+                          type="text" 
+                          placeholder="Search" 
+                          className="mr-sm-2" 
+                        />
+                      </Form.Group>
+                    </Form>
+                  : null
+                }
+                {!showSearch
+                  ? <Button onClick={() => setShowSearch(!showSearch)} className="search-button" variant="outline-dark" size="sm">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+                    </Button>
+                  : null
+                }
             </Col>
           </Row>
         </header>
@@ -45,4 +80,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

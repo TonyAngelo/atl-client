@@ -16,8 +16,8 @@ export default function RegularPage({
   
   return (
     <Row>
-      <Col className="d-none d-lg-block" lg={1}></Col>
-      <Col lg={10}>
+      <Col className="d-none d-lg-block" lg={2}></Col>
+      <Col lg={8}>
         {data['_embedded']['wp:featuredmedia'].length > 0
           ? <Figure className="mt-2">
               <Figure.Image src={cdnRewrite(data['_embedded']['wp:featuredmedia'][0]['source_url'])} fluid rounded />
@@ -27,7 +27,7 @@ export default function RegularPage({
         }
         <div dangerouslySetInnerHTML={{ __html: data.content.rendered }} />
       </Col>
-      <Col className="d-none d-lg-block" lg={1}></Col>
+      <Col className="d-none d-lg-block" lg={2}></Col>
     </Row>
   );
 }

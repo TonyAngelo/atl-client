@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import { xmlParse } from "../libs/xml-parse";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
+import SocialShare from "../components/SocialShare";
 //import "./Home.css";
 
 export default function Theory(props) {
@@ -38,6 +40,11 @@ export default function Theory(props) {
             <Col lg={8}>
               <BlogSection
                 data={data[0]}
+                meta={false}
+              />
+              <SocialShare
+                link={window.location.href}
+                title={xmlParse(data[0].title.rendered)}
               />
             </Col>
             <Col lg={4}>

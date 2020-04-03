@@ -1,4 +1,7 @@
 /* stylelint-disable selector-list-comma-newline-after */
+header .search-button {
+  border-color: transparent;
+}
 
 .jumbotron {
   background-image: url("https://images.unsplash.com/photo-1473163928189-364b2c4e1135?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
@@ -18,8 +21,6 @@
 .blog-header-logo:hover {
   text-decoration: none;
 }
-
-
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
@@ -67,17 +68,6 @@ blockquote {
   /*font-size: 14px;*/
   line-height: 1.2;
   color: #666;
-
-  /*Box Shadow - (Optional)*/
-  /*-moz-box-shadow: 2px 2px 15px #ccc;
-  -webkit-box-shadow: 2px 2px 15px #ccc;
-  box-shadow: 2px 2px 15px #ccc;*/
-
-  /*Borders - (Optional)*/
-  /*border-left-style: solid;
-  border-left-width: 15px;
-  border-right-style: solid;
-  border-right-width: 2px; */
 
   /*Boarder Color */
   border-left-color: #656d77;
@@ -224,6 +214,7 @@ blockquote em{
 }
 .blog-post-meta {
   margin-bottom: 1.25rem;
+  font-size: .9rem;
   color: #6c757d;
 }
 

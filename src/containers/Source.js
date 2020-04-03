@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, ResponsiveEmbed } from 'react-bootstrap';
+import { Row, Col, ResponsiveEmbed, Button } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import { xmlParse } from "../libs/xml-parse";
 import { cdnRewrite } from "../libs/cdn-rewrite";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
+import SocialShare from "../components/SocialShare";
 //import "./Home.css";
 
 export default function Source(props) {
@@ -37,6 +39,11 @@ export default function Source(props) {
       {data.length > 0
         ? <Row>
             <Col lg={8}>
+              <Row className="mb-4">
+                <Col>
+                  <Button variant="secondary" size="lg" href={data[0].source_link}>Get this source</Button>
+                </Col>
+              </Row>
               <BlogSection
                 meta={false}
                 data={data[0]}
@@ -52,12 +59,12 @@ export default function Source(props) {
                     <a href={cdnRewrite(data[0].attachment.guid)}>link to pdf</a>
                   </Col>
                 </Row>
-              : <Row className="mb-4">
-                  <Col>
-                    <a href={data[0].source_link}>link to source</a>
-                  </Col>
-                </Row>
+              : null
             }
+              <SocialShare
+                link={window.location.href}
+                title={xmlParse(data[0].title.rendered)}
+              />
             </Col>
             <Col lg={4}>
               {data[0].source_person

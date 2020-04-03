@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Figure } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import { xmlParse } from "../libs/xml-parse";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
+import SocialShare from "../components/SocialShare";
 //import "./Home.css";
 
 export default function Person(props) {
@@ -37,7 +39,12 @@ export default function Person(props) {
         ? <Row>
             <Col lg={8}>
               <BlogSection
+                meta={false}
                 data={data[0]}
+              />
+              <SocialShare
+                link={window.location.href}
+                title={xmlParse(data[0].title.rendered)}
               />
             </Col>
             <Col lg={4}>

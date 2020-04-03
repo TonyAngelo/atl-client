@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import { xmlParse } from "../libs/xml-parse";
 import FeaturedImage from "../components/FeaturedImage";
 import BlogContent from "../components/BlogContent";
 import BlogMeta from "../components/BlogMeta";
@@ -38,6 +39,7 @@ export default function BlogSection({
           <BlogContent>{data.content.rendered}</BlogContent>
           {meta
             ? <BlogFooter 
+                title={xmlParse(data.title.rendered)}
                 category={data['_embedded']['wp:term'][0][0]}
                 tags={data['_embedded']['wp:term'][1]}
               />
