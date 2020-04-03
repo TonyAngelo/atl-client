@@ -11,8 +11,11 @@ import SummaryPost from "../components/SummaryPost";
 export default function BlogTag(props) {
   const [posts, setPosts] = useState([]);
   const [name, setName] = useState("");
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(10);
+  
   let tagQuery = `tags?slug=${props.match.params.tag}`
-  let blogQuery = `?page=1&per_page=20&_fields=title,date,excerpt,slug`;
+  let blogQuery = `?page=${page}&per_page=${pages}&_fields=title,date,excerpt,slug`;
 
   useEffect(() => {
     async function onLoad() {
@@ -49,9 +52,9 @@ export default function BlogTag(props) {
     <main>
       <PageTitle loaded={props.isLoaded}>{"Tag: " + name}</PageTitle>
 	    <Row>
-        <Col className="d-none d-lg-block" lg={1}></Col>
+        <Col className="d-none d-lg-block" lg={2}></Col>
         {posts.length > 0
-	        ? <Col lg={10} className="blog-main">
+	        ? <Col lg={8} className="blog-main">
               {posts.map((post, index) => 
                 <SummaryPost
                   key = {index}
@@ -65,7 +68,7 @@ export default function BlogTag(props) {
     	      </Col>
           : null
         }
-        <Col className="d-none d-lg-block" lg={1}></Col>
+        <Col className="d-none d-lg-block" lg={2}></Col>
 	    </Row>
 	  </main>
   );

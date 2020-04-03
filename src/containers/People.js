@@ -6,7 +6,10 @@ import TiledPostPage from "../components/TiledPostPage";
 
 export default function People(props) {
   const [data, setData] = useState([]);
-  let queryStr = "person?&order=asc&page=1&per_page=100&exclude=100&_embed";
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(24);
+
+  let queryStr = `person?&order=asc&page=${page}&per_page=${pages}&exclude=100&_embed`;
 
   useEffect(() => {
     async function onLoad() {

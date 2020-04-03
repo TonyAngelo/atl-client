@@ -37,14 +37,13 @@ export default function BlogSection({
             : null
           }
           <BlogContent>{data.content.rendered}</BlogContent>
-          {meta
-            ? <BlogFooter 
-                title={xmlParse(data.title.rendered)}
-                category={data['_embedded']['wp:term'][0][0]}
-                tags={data['_embedded']['wp:term'][1]}
-              />
-            : null
-          }
+          <BlogFooter 
+            data={data}
+            meta={meta}
+            title={xmlParse(data.title.rendered)}
+            category={meta ? data['_embedded']['wp:term'][0][0] : null}
+            tags={meta ? data['_embedded']['wp:term'][1] : null}
+          />
         </Col>
       </Row>
   );

@@ -6,7 +6,10 @@ import TiledPostPage from "../components/TiledPostPage";
 
 export default function Theories(props) {
   const [data, setData] = useState([]);
-  let queryStr = "theory?_embed&order=asc&page=1&per_page=100";
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(24);
+
+  let queryStr = `theory?_embed&order=asc&page=${page}&per_page=${pages}`;
 
   useEffect(() => {
     async function onLoad() {

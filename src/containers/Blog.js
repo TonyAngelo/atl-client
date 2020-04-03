@@ -9,8 +9,10 @@ import SummaryPost from "../components/SummaryPost";
 
 export default function Blog(props) {
   const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(10);
 
-  let blogQuery = "?page=1&per_page=100&_fields=categories,title,date,excerpt,slug,sticky";
+  let blogQuery = `?page=${page}&per_page=${pages}&_fields=categories,title,date,excerpt,slug,sticky`;
 
   useEffect(() => {
     async function onLoad() {
@@ -35,9 +37,9 @@ export default function Blog(props) {
     <main>
       <PageTitle loaded={props.isLoaded}>Dialogue</PageTitle>
 	    <Row>
-        <Col className="d-none d-lg-block" lg={1}></Col>
+        <Col className="d-none d-lg-block" lg={2}></Col>
         {posts.length > 0
-	        ? <Col lg={10} className="blog-main">
+	        ? <Col lg={8} className="blog-main">
               {posts.map((post, index) => 
                 <SummaryPost
                   key = {index}
@@ -52,7 +54,7 @@ export default function Blog(props) {
     	      </Col>
           : null
         }
-        <Col className="d-none d-lg-block" lg={1}></Col>
+        <Col className="d-none d-lg-block" lg={2}></Col>
 	    </Row>
 	  </main>
   );

@@ -42,10 +42,6 @@ export default function Theory(props) {
                 data={data[0]}
                 meta={false}
               />
-              <SocialShare
-                link={window.location.href}
-                title={xmlParse(data[0].title.rendered)}
-              />
             </Col>
             <Col lg={4}>
               {data[0].theory_sources

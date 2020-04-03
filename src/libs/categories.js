@@ -33,3 +33,17 @@ export const categoryNameColors = {
 	'Catastrophism': 'text-danger',
 	'Question': 'text-primary'
 }
+
+export const searchColors = {
+	'post': 'text-primary',
+	'people': 'text-warning',
+	'sources':'text-secondary',
+	'theories': 'text-sucess'
+}
+
+export const searchNames = {
+	'post': 'Blog',
+	'people': 'Person',
+	'sources':'Source',
+	'theories': 'Theory'
+}

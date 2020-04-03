@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
-//import { categoryIDs, categoryNames } from "../libs/categories";
 import PageTitle from "../components/PageTitle";
 import SearchPost from "../components/SearchPost";
 
@@ -10,8 +9,10 @@ import SearchPost from "../components/SearchPost";
 
 export default function BlogSearch(props) {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(10);
   
-  let blogQuery = `search?search=${props.match.params.search}`;
+  let blogQuery = `search?search=${props.match.params.search}&page=${page}&per_page=${pages}&subtype=post,people,sources,theories&_embed`;
 
   useEffect(() => {
     async function onLoad() {
@@ -38,21 +39,24 @@ export default function BlogSearch(props) {
     <main>
       <PageTitle loaded={props.isLoaded}>{"Search: " + props.match.params.search}</PageTitle>
 	    <Row>
-        <Col className="d-none d-lg-block" lg={1}></Col>
+        <Col className="d-none d-lg-block" lg={2}></Col>
         {data.length > 0
-	        ? <Col lg={10} className="blog-main">
+	        ? <Col lg={8} className="blog-main">
               {data.map((post, index) => 
                 <SearchPost
                   key = {index}
                   index = {index}
-                  title = {post.title}
-                  link = {post.url}>
+                  category = {post.subtype}
+                  title = {post['_embedded']['self'][0].title.rendered}
+                  date = {post['_embedded']['self'][0].date}
+                  text = {post['_embedded']['self'][0].excerpt.rendered}
+                  link = {"/" + post.url.substring(25,post.url.length)}>
                 </SearchPost>
               )}
     	      </Col>
           : null
         }
-        <Col className="d-none d-lg-block" lg={1}></Col>
+        <Col className="d-none d-lg-block" lg={2}></Col>
 	    </Row>
 	  </main>
   );

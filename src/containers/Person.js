@@ -42,10 +42,6 @@ export default function Person(props) {
                 meta={false}
                 data={data[0]}
               />
-              <SocialShare
-                link={window.location.href}
-                title={xmlParse(data[0].title.rendered)}
-              />
             </Col>
             <Col lg={4}>
               {data[0].writing
