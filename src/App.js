@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import { HashLink as Link } from 'react-router-hash-link';
 import { LinkContainer } from 'react-router-bootstrap'
@@ -8,6 +8,7 @@ import './App.css';
 
 function App(props) {
   const [isLoaded, setIsLoaded] = useState([]);
+  const [navKey, setNavKey] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [search, setSearch] = useState("");
   const headerCatagories = [
@@ -63,13 +64,13 @@ function App(props) {
           </Row>
         </header>
         <div className="nav-scroller py-1 mb-2">
-          <Nav className="d-flex justify-content-between">
+          <Nav variant="pills" activeKey={navKey} onSelect={(eventKey) => setNavKey(eventKey)} className="d-flex justify-content-between">
             {headerCatagories.map((item, index) => 
-              <Nav.Link key={index} href={"/" + item.toLowerCase().replace(' ', '-')} className="p-2 text-muted">{item}</Nav.Link>
+              <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}><Nav.Link eventKey={index} className="p-2 text-muted">{item}</Nav.Link></LinkContainer>
             )}
           </Nav>
         </div>
-        <Routes appProps={{ isLoaded, setIsLoaded }} />
+        <Routes appProps={{ isLoaded, setIsLoaded, navKey, setNavKey }} />
       </Container>
       <footer className="blog-footer">
         <p>

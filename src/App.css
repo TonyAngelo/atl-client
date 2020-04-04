@@ -164,8 +164,9 @@ blockquote em{
   font-size: .875rem;
 }
 
-.nav-item {
-  cursor: pointer;
+.nav.nav-pills .nav-link.active {
+  background-color: transparent;
+  text-decoration: underline;
 }
 
 .flex-auto {
