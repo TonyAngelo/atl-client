@@ -15,7 +15,6 @@ export default function BlogFooter({
   if(disabled || isLoading) {
     return null;
   }
-  console.log(window.location.href);
   return (
     <div className="blog-post-footer my-4">
       {meta

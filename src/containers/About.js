@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
 import PageTitle from "../components/PageTitle";
 import RegularPage from "../components/RegularPage";
-import { cdnRewrite } from "../libs/cdn-rewrite";
+//import { headerValues } from "../libs/categories";
 //import "./Home.css";
 
 export default function About(props) {
@@ -12,6 +12,8 @@ export default function About(props) {
   useEffect(() => {
     async function onLoad() {
       props.setIsLoaded(false);
+      //props.setNavKey(headerValues["About"]);
+
       try {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { 

@@ -4,20 +4,21 @@ import { HashLink as Link } from 'react-router-hash-link';
 import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Row, Col, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Routes from "./Routes";
+import { headerCategories } from "./libs/categories";
 import './App.css';
 
 function App(props) {
   const [isLoaded, setIsLoaded] = useState([]);
-  const [navKey, setNavKey] = useState("");
+  //const [navKey, setNavKey] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [search, setSearch] = useState("");
-  const headerCatagories = [
-    'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
-  ];
+  // const headerCatagories = [
+  //   'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
+  // ];
 
   async function handleSearchSubmit(e) {
     e.preventDefault();
-    console.log(search);
+    //console.log(search);
     setShowSearch(false);
     props.history.push("/search/" + search);
   }
@@ -64,13 +65,13 @@ function App(props) {
           </Row>
         </header>
         <div className="nav-scroller py-1 mb-2">
-          <Nav variant="pills" activeKey={navKey} onSelect={(eventKey) => setNavKey(eventKey)} className="d-flex justify-content-between">
-            {headerCatagories.map((item, index) => 
-              <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}><Nav.Link eventKey={index} className="p-2 text-muted">{item}</Nav.Link></LinkContainer>
+          <Nav variant="pills" className="d-flex justify-content-between">
+            {headerCategories.map((item, index) => 
+              <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}><Nav.Link active={false} className="p-2 text-muted">{item}</Nav.Link></LinkContainer>
             )}
           </Nav>
         </div>
-        <Routes appProps={{ isLoaded, setIsLoaded, navKey, setNavKey }} />
+        <Routes appProps={{ isLoaded, setIsLoaded }} />
       </Container>
       <footer className="blog-footer">
         <p>

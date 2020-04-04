@@ -18,7 +18,7 @@ export default function Home(props) {
   useEffect(() => {
     async function onLoad() {
       props.setIsLoaded(false);
-      props.setNavKey("");
+      //props.setNavKey("");
       // get sticky
       try {
         const response = await fetch(apiHeader + "posts" + stickyQuery);
