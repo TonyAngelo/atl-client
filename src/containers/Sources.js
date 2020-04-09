@@ -7,9 +7,9 @@ import TiledPostPage from "../components/TiledPostPage";
 export default function Sources(props) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(24);
+  const [pages, setPages] = useState(100);
 
-  let queryStr = `source?&order=asc&page=${page}&per_page=${pages}&_embed&_fields=title,excerpt,slug`;
+  let queryStr = `source?&order=asc&page=${page}&per_page=${pages}&_embed&_fields=title,excerpt,slug,date,source_author,source_translator`;
 
   useEffect(() => {
     async function onLoad() {
@@ -37,6 +37,7 @@ export default function Sources(props) {
       <TiledPostPage
         path = "sources"
         data = {data}
+        meta = {true}
       />
     </main>
   );

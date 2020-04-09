@@ -8,6 +8,7 @@ export default function TiledPostPage({
   disabled = false,
   path = "",
   data = [],
+  meta = false,
   ...props
 }) {
   if(disabled) {
@@ -15,23 +16,28 @@ export default function TiledPostPage({
   }
   
   return (
-    <Row>
-      <Col>
         <Row>
           {data.length > 0
             ? data.map((item, index) =>
                 <Col key = {index} md={6} lg={4}>
-                  <TiledPost
-                    title = {item.title.rendered}
-                    text = {item.excerpt.rendered}
-                    link = {"/" + path + "/" + item.slug}>
-                  </TiledPost>
+                  {meta
+                    ? <TiledPost
+                        title = {item.title.rendered}
+                        text = {item.excerpt.rendered}
+                        link = {"/" + path + "/" + item.slug}
+                        date = {item.date}
+                        author = {item.source_author}
+                      />
+                    : <TiledPost
+                        title = {item.title.rendered}
+                        text = {item.excerpt.rendered}
+                        link = {"/" + path + "/" + item.slug}
+                      />
+                  }
                 </Col>
               )
             : null
           }
         </Row>
-      </Col>
-    </Row>
   );
 }

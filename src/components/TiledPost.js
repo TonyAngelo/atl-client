@@ -9,6 +9,8 @@ export default function TiledPost({
   category = "",
   title = "",
   text = "",
+  date = "",
+  author = "",
   linkText = "Continue reading",
   link = "",
   ...props
@@ -16,6 +18,8 @@ export default function TiledPost({
   if(disabled) {
     return null;
   }
+
+  const myDate = new Date(date);
   
   return (
     <Card className="flex-md-row mb-4 box-shadow">
@@ -27,6 +31,14 @@ export default function TiledPost({
         <h4 className="mb-2">
           <Link to={link} className="text-dark" dangerouslySetInnerHTML={{ __html: title }} />
         </h4>
+        {author.length > 0
+          ? <div className="mb-1 text-muted">by {author}</div>
+          : null
+        }
+        {date.length > 0 && myDate.getFullYear() > 1
+          ? <div className="mb-1 text-muted">in {myDate.getFullYear()}</div>
+          : null
+        }
         <div dangerouslySetInnerHTML={{ __html: text }} />
         <div className="text-right w-100 mt-2"><Link to={link}>{linkText}</Link></div>
       </div>
