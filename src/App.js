@@ -4,6 +4,8 @@ import { HashLink as Link } from 'react-router-hash-link';
 import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Row, Col, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Routes from "./Routes";
+import { defaultDescription } from "./libs/seo";
+import {Helmet} from "react-helmet";
 import { headerCategories } from "./libs/categories";
 import './App.css';
 
@@ -25,6 +27,11 @@ function App(props) {
 
   return (
     <div id="home">
+      <Helmet>
+        <title>Atlantis FYI</title>
+        <link rel="canonical" href="https://atlantis.fyi" />
+        <meta name="description" content={defaultDescription} />
+      </Helmet>
       <Container className="mb-4">
         <header className="blog-header py-3">
           <Row className="flex-nowrap justify-content-between align-items-center">

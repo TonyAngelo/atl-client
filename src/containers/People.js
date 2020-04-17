@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
+import { defaultDescription } from "../libs/seo";
+import {Helmet} from "react-helmet";
 import PageTitle from "../components/PageTitle";
 import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
@@ -33,6 +35,11 @@ export default function People(props) {
 
   return (
     <main>
+      <Helmet>
+        <title>People | Atlantis FYI</title>
+        <link rel="canonical" href="https://atlantis.fyi/people" />
+        <meta name="description" content={defaultDescription} />
+      </Helmet>
       <PageTitle loaded={props.isLoaded}>People</PageTitle>
       <TiledPostPage
         path = "people"

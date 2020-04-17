@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import { defaultDescription } from "../libs/seo";
+import {Helmet} from "react-helmet";
 import PageTitle from "../components/PageTitle";
 import SearchPost from "../components/SearchPost";
 
@@ -37,6 +39,11 @@ export default function BlogSearch(props) {
 
   return (
     <main>
+      <Helmet>
+        <title>Search: {props.match.params.search} | Atlantis FYI</title>
+        <link rel="canonical" href={"https://atlantis.fyi/search/" + props.match.params.search} />
+        <meta name="description" content={defaultDescription} />
+      </Helmet>
       <PageTitle loaded={props.isLoaded}>{"Search: " + props.match.params.search}</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={2}></Col>

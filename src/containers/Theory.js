@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
-import { xmlParse } from "../libs/xml-parse";
+import { defaultDescription } from "../libs/seo";
+import {Helmet} from "react-helmet";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
@@ -35,14 +36,19 @@ export default function Theory(props) {
 
   return (
     <main>
+      <Helmet>
+        <title>{data.length > 0 ? data[0].title.rendered : ""} | Atlantis FYI</title>
+        <link rel="canonical" href={"https://atlantis.fyi/theories/" + props.match.params.theory} />
+        <meta name="description" content={defaultDescription} />
+      </Helmet>
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>
             <Col lg={8}>
               <TheoryMap 
-                lat={parseInt(data[0].theory_latitude)}
-                lng={parseInt(data[0].theory_longitude)}
-                zoom={parseInt(data[0].theory_zoom)}
+                lat={parseFloat(data[0].theory_latitude)}
+                lng={parseFloat(data[0].theory_longitude)}
+                zoom={parseFloat(data[0].theory_zoom)}
               />
               <BlogSection
                 data={data[0]}

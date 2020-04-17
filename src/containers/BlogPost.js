@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Figure } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
+import { defaultDescription } from "../libs/seo";
+import {Helmet} from "react-helmet";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import FeaturedImage from "../components/FeaturedImage";
@@ -34,6 +36,11 @@ export default function BlogPost(props) {
 
   return (
     <main>
+      <Helmet>
+        <title>{data.length > 0 ? data[0].title.rendered : ""} | Atlantis FYI</title>
+        <link rel="canonical" href={"https://atlantis.fyi/blog/" + props.match.params.post} />
+        <meta name="description" content={defaultDescription} />
+      </Helmet>
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>

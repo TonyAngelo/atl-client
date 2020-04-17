@@ -33,12 +33,6 @@ export default function TheoryMap({
   );
 
   function getMapOptions(maps) {
-    // next props are exposed at maps
-    // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
-    // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
-    // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
-    // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
-    // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
     return {
       mapTypeId: maps.MapTypeId.SATELLITE,
     };
@@ -52,11 +46,7 @@ export default function TheoryMap({
         defaultZoom={zoom}
         options={getMapOptions}
       >
-        <AnyReactComponent
-          lat={lat}
-          lng={lng}
-          text={text}
-        />
+        
       </GoogleMapReact>
     </div>
   );
