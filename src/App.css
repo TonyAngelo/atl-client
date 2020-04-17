@@ -40,6 +40,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5em;
 }
 
+.has-small-font-size {
+  font-size: .8rem;
+}
+
 .has-text-align-right {
   text-align: right;
 }
@@ -97,14 +101,13 @@ blockquote::after{
 
 blockquote a{
   text-decoration: none;
-  background: #eee;
+  /*background: #eee;*/
   cursor: pointer;
   padding: 0 3px;
-  color: #c76c0c;
 }
 
 blockquote a:hover{
- color: #666;
+ /*color: #666;*/
 }
 
 blockquote em{

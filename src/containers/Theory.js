@@ -6,6 +6,7 @@ import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
 import SocialShare from "../components/SocialShare";
+import TheoryMap from "../components/TheoryMap";
 //import "./Home.css";
 
 export default function Theory(props) {
@@ -38,6 +39,11 @@ export default function Theory(props) {
       {data.length > 0
         ? <Row>
             <Col lg={8}>
+              <TheoryMap 
+                lat={parseInt(data[0].theory_latitude)}
+                lng={parseInt(data[0].theory_longitude)}
+                zoom={parseInt(data[0].theory_zoom)}
+              />
               <BlogSection
                 data={data[0]}
                 meta={false}

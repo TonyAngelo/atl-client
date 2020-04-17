@@ -41,7 +41,7 @@ export default function Source(props) {
             <Col lg={8}>
               <Row className="mb-4">
                 <Col>
-                  <Button variant="secondary" size="lg" href={data[0].source_link}>Get this source</Button>
+                  <Button variant="secondary" size="lg" href={data[0].source_link}>Go to source</Button>
                 </Col>
               </Row>
               <BlogSection
