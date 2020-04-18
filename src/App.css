@@ -56,6 +56,14 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
+li.list-check {
+  list-style-type: "\2713"; 
+}
+
+li.list-nocheck {
+  list-style-type: "\2716";
+}
+
 blockquote.wp-block-quote {
   margin: 0;
 }

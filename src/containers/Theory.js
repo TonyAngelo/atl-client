@@ -45,11 +45,14 @@ export default function Theory(props) {
       {data.length > 0
         ? <Row>
             <Col lg={8}>
-              <TheoryMap 
-                lat={parseFloat(data[0].theory_latitude)}
-                lng={parseFloat(data[0].theory_longitude)}
-                zoom={parseFloat(data[0].theory_zoom)}
-              />
+              {data[0].theory_latitude.length > 0 && data[0].theory_longitude.length > 0
+                ? <TheoryMap 
+                    lat={parseFloat(data[0].theory_latitude)}
+                    lng={parseFloat(data[0].theory_longitude)}
+                    zoom={parseFloat(data[0].theory_zoom)}
+                  />
+                : null
+              }
               <BlogSection
                 data={data[0]}
                 meta={false}
