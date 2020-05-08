@@ -38,7 +38,7 @@ export default function BlogPost(props) {
       {data.length > 0
         ? <StandardHelmet 
             title={data[0].title.rendered}
-            //description={data.length > 0 ? data[0].excerpt.rendered : ""}
+            description={data.length > 0 ? data[0].excerpt.rendered : ""}
             link={"https://atlantis.fyi/blog/" + props.match.params.post} 
           />
         : null

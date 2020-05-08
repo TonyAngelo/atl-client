@@ -18,7 +18,7 @@ export default function StandardHelmet({
   }
   return (
     <Helmet>
-      <title>{title.length > 0 ? title + " | Atlantis FYI" : "Atlantis FYI"}</title>
+      <title>{title.length > 0 ? xmlParse(title) + " | Atlantis FYI" : "Atlantis FYI"}</title>
       <link rel="canonical" href={link} />
       <meta name="description" content={description.length > 0 ? xmlParse(description) : defaultDescription} />
     </Helmet>
