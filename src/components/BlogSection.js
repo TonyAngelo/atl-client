@@ -31,7 +31,6 @@ export default function BlogSection({
           {meta
             ? <BlogMeta 
                 date={data.date}
-                edited={data.modified}
                 author="Tony Petrangelo"
               />
             : null

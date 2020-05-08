@@ -1,5 +1,5 @@
 export const headerCategories = [
-	'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
+	'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About'//, 'Contact'
 ];
 
 export const headerValues = {
@@ -9,7 +9,7 @@ export const headerValues = {
 	'People': "4", 
 	'Plato': "5", 
 	'About': "6", 
-	'Contact': "7"
+	//'Contact': "7"
 };
 
 export const categoryColors = {

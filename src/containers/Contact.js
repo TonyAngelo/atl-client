@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
-import { defaultDescription } from "../libs/seo";
-import {Helmet} from "react-helmet";
+import StandardHelmet from "../components/StandardHelmet";
 import PageTitle from "../components/PageTitle";
 import RegularPage from "../components/RegularPage";
 //import "./Home.css";
@@ -31,11 +30,10 @@ export default function Contact(props) {
 
   return (
     <main>
-      <Helmet>
-        <title>Contact | Atlantis FYI</title>
-        <link rel="canonical" href="https://atlantis.fyi/contact" />
-        <meta name="description" content={defaultDescription} />
-      </Helmet>
+      <StandardHelmet 
+        title={"Contact"}
+        link={"https://atlantis.fyi/contact"} 
+      />
       <PageTitle loaded={props.isLoaded}>Contact</PageTitle>
       <RegularPage
         data = {data}

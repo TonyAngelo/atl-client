@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import StandardHelmet from "../components/StandardHelmet";
 import { LinkContainer } from 'react-router-bootstrap'
 import { apiHeader } from "../libs/api";
 import { Row, Col, Button } from 'react-bootstrap';
@@ -31,6 +32,10 @@ export default function FinderStep() {
 
   return (
     <main>
+      <StandardHelmet 
+        title={"Finder"}
+        link={"https://atlantis.fyi/finder"} 
+      />
       <Row className="my-4 text-center">
         <Col>
           <h1 className="my-2">Atlantis Finder</h1>

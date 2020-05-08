@@ -18,6 +18,7 @@ import Person from "./containers/Person";
 import Plato from "./containers/Plato";
 import Contact from "./containers/Contact";
 import About from "./containers/About";
+import Timeline from "./containers/Timeline";
 import NotFound from "./containers/NotFound";
 
 export default function Routes({ appProps }) {
@@ -39,7 +40,8 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/finder" exact component={Finder} appProps={appProps} />
       <AppliedRoute path="/finder/real" exact component={FinderReal} appProps={appProps} />
       <AppliedRoute path="/about" exact component={About} appProps={appProps} />
-      <AppliedRoute path="/contact" exact component={Contact} appProps={appProps} />
+      //<AppliedRoute path="/contact" exact component={Contact} appProps={appProps} />
+      <AppliedRoute path="/timeline" exact component={Timeline} appProps={appProps} />
       { /* Finally, catch all unmatched routes */ }
       <Route component={NotFound} />
     </Switch>

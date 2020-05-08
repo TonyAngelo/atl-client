@@ -5,6 +5,7 @@ import MyJumbotron from "../components/Jumbotron";
 import FeaturedPost from "../components/FeaturedPost";
 import SummaryPost from "../components/SummaryPost";
 import { apiHeader } from "../libs/api";
+import StandardHelmet from "../components/StandardHelmet";
 //import "./Home.css";
 
 export default function Home(props) {
@@ -53,6 +54,10 @@ export default function Home(props) {
 
   return (
     <main>
+      <StandardHelmet 
+        title={""}
+        link={"https://atlantis.fyi"} 
+      />
       {jumboOn
         ? <MyJumbotron 
             title = "The Atlantis Finder"
@@ -98,9 +103,12 @@ export default function Home(props) {
                   link = {"/blog/" + post.slug}>
                 </SummaryPost>
               )}
-              <nav className="blog-pagination">
-    	          <Link className="btn btn-outline-primary" to="/dialogue#more">See More Posts</Link>
-    	        </nav>
+              {posts.length > 5
+                ? <nav className="blog-pagination">
+        	          <Link className="btn btn-outline-primary" to="/blog#more">See More Posts</Link>
+        	        </nav>
+                : null
+              }
     	      </Col>
           : null
         }

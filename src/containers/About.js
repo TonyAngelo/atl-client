@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
-import { defaultDescription } from "../libs/seo";
-import {Helmet} from "react-helmet";
+import StandardHelmet from "../components/StandardHelmet";
 import PageTitle from "../components/PageTitle";
 import RegularPage from "../components/RegularPage";
 //import { headerValues } from "../libs/categories";
@@ -34,11 +33,10 @@ export default function About(props) {
 
   return (
     <main>
-      <Helmet>
-        <title>About | Atlantis FYI</title>
-        <link rel="canonical" href="https://atlantis.fyi/about" />
-        <meta name="description" content={defaultDescription} />
-      </Helmet>
+      <StandardHelmet 
+        title={"About"}
+        link={"https://atlantis.fyi/about"} 
+      />
       <PageTitle loaded={props.isLoaded}>About</PageTitle>
       <RegularPage
         data = {data}

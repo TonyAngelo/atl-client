@@ -23,9 +23,12 @@ export default function BlogMeta({
     <p className="ml-4 font-italic blog-post-meta">
       by {author}
       <br/>
-      Published {months[myDate.getMonth()] + " " + myDate.getDate() + ", " + myDate.getFullYear()} 
-      <br/>
-      Revised {months[myEdit.getMonth()] + " " + myEdit.getDate() + ", " + myEdit.getFullYear()}
+      on {months[myDate.getMonth()] + " " + myDate.getDate() + ", " + myDate.getFullYear()} 
+      {edited.length > 0
+        ? <div><br/>
+          {"Revised " + months[myEdit.getMonth()] + " " + myEdit.getDate() + ", " + myEdit.getFullYear()}</div>
+        : null
+      }
     </p>
   );
 }

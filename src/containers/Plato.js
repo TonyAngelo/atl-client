@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
-import { defaultDescription } from "../libs/seo";
-import {Helmet} from "react-helmet";
+import StandardHelmet from "../components/StandardHelmet";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarDialogue from "../components/SidebarDialogue";
@@ -52,11 +51,10 @@ export default function Plato(props) {
 
   return (
     <main>
-      <Helmet>
-        <title>{data.length > 0 ? data[0].title.rendered : ""} | Atlantis FYI</title>
-        <link rel="canonical" href={"https://atlantis.fyi/plato"} />
-        <meta name="description" content={defaultDescription} />
-      </Helmet>
+      <StandardHelmet 
+        title={"Plato"}
+        link={"https://atlantis.fyi/plato"} 
+      />
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>

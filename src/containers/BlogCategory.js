@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
-import { defaultDescription } from "../libs/seo";
-import {Helmet} from "react-helmet";
+import StandardHelmet from "../components/StandardHelmet";
 import { categoryIDs, categoryNames } from "../libs/categories";
 import PageTitle from "../components/PageTitle";
 import SummaryPost from "../components/SummaryPost";
@@ -38,11 +37,10 @@ export default function BlogCategory(props) {
 
   return (
     <main>
-      <Helmet>
-        <title>Category: {categoryNames[categoryIDs[props.match.params.category]]} | Atlantis FYI</title>
-        <link rel="canonical" href={"https://atlantis.fyi/blog/category/" + props.match.params.category} />
-        <meta name="description" content={defaultDescription} />
-      </Helmet>
+      <StandardHelmet 
+        title={"Category: " + categoryNames[categoryIDs[props.match.params.category]]}
+        link={"https://atlantis.fyi/blog/category/" + props.match.params.category} 
+      />
       <PageTitle loaded={props.isLoaded}>{"Category: " + categoryNames[categoryIDs[props.match.params.category]]}</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={2}></Col>

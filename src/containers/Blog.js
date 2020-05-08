@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
-import { defaultDescription } from "../libs/seo";
-import {Helmet} from "react-helmet";
+import StandardHelmet from "../components/StandardHelmet";
 import PageTitle from "../components/PageTitle";
 import SummaryPost from "../components/SummaryPost";
 
@@ -37,11 +36,10 @@ export default function Blog(props) {
 
   return (
     <main>
-      <Helmet>
-        <title>Blog | Atlantis FYI</title>
-        <link rel="canonical" href="https://atlantis.fyi/blog" />
-        <meta name="description" content={defaultDescription} />
-      </Helmet>
+      <StandardHelmet 
+        title={"Blog"}
+        link={"https://atlantis.fyi/blog"} 
+      />
       <PageTitle loaded={props.isLoaded}>Dialogue</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={2}></Col>

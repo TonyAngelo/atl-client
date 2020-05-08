@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
-import { defaultDescription } from "../libs/seo";
-import {Helmet} from "react-helmet";
+import StandardHelmet from "../components/StandardHelmet";
 import PageTitle from "../components/PageTitle";
 import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
@@ -35,11 +34,10 @@ export default function Sources(props) {
 
   return (
     <main>
-      <Helmet>
-        <title>Sources | Atlantis FYI</title>
-        <link rel="canonical" href="https://atlantis.fyi/sources" />
-        <meta name="description" content={defaultDescription} />
-      </Helmet>
+      <StandardHelmet 
+        title={"Sources"}
+        link={"https://atlantis.fyi/sources"} 
+      />
       <PageTitle loaded={props.isLoaded}>Sources</PageTitle>
       <TiledPostPage
         path = "sources"
