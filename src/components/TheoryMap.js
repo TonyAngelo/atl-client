@@ -14,24 +14,6 @@ export default function TheoryMap({
     return null;
   }
 
-  const AnyReactComponent = ({ text }) => (
-    <div style={{
-      color: 'white', 
-      background: '#007bff',
-      borderColor: 'red',
-      padding: '1em .5em',
-      display: 'inline-flex',
-      textAlign: 'center',
-      fontSize: '1rem',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: '100%',
-      transform: 'translate(-50%, -50%)'
-    }}>
-      {text}
-    </div>
-  );
-
   function getMapOptions(maps) {
     return {
       mapTypeId: maps.MapTypeId.SATELLITE,
@@ -39,7 +21,7 @@ export default function TheoryMap({
   }
 
   return (
-    <div style={{ height: '50vh', width: '100%' }} className="mb-4">
+    <div style={{ height: '75vh', width: '100%' }} className="mb-4">
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyCKXbf_8tEGf5fVR1rfiDCfDqONEL9N13o" }}
         defaultCenter={{lat: lat,lng: lng}}

@@ -12,8 +12,9 @@ import SummaryPost from "../components/SummaryPost";
 export default function BlogCategory(props) {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(10);
+  //const [pages, setPages] = useState(10);
   
+  const pages = 100;
   let blogQuery = `?categories=${categoryIDs[props.match.params.category]}&page=${page}&per_page=${pages}&_fields=title,date,excerpt,slug`;
 
   useEffect(() => {

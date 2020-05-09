@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
@@ -13,8 +13,9 @@ export default function BlogTag(props) {
   const [posts, setPosts] = useState([]);
   const [name, setName] = useState("");
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(10);
+  //const [pages, setPages] = useState(10);
   
+  const pages = 100;
   let tagQuery = `tags?slug=${props.match.params.tag}`
   let blogQuery = `?page=${page}&per_page=${pages}&_fields=title,date,excerpt,slug`;
 
@@ -26,7 +27,7 @@ export default function BlogTag(props) {
         const response = await fetch(apiHeader + tagQuery);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload)
+          //console.log(payload)
           blogQuery = blogQuery + "&tags=" + payload[0].id
           setName(payload[0].name);
         } 

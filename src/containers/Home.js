@@ -25,7 +25,7 @@ export default function Home(props) {
         const response = await fetch(apiHeader + "posts" + stickyQuery);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload);
+          //console.log(payload);
           if(payload.length > 0) {
             blogQuery = blogQuery + "&exclude="
             payload.map((item, index) => blogQuery = blogQuery + item.id + ",");
@@ -40,7 +40,7 @@ export default function Home(props) {
         const response = await fetch(apiHeader + "posts" + blogQuery);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload);
+          //console.log(payload);
           setPosts(payload);
         } 
       } catch (e) {

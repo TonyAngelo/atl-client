@@ -21,7 +21,7 @@ export default function Source(props) {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload);
+          //console.log(payload);
           setData(payload);
         } 
       } catch (e) {

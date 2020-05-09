@@ -2,12 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import { HashLink as Link } from 'react-router-hash-link';
 import { LinkContainer } from 'react-router-bootstrap'
+import ReactGA from 'react-ga';
+import { createBrowserHistory } from 'history';
 import { Container, Row, Col, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Routes from "./Routes";
 import { defaultDescription } from "./libs/seo";
 import {Helmet} from "react-helmet";
 import { headerCategories } from "./libs/categories";
+
 import './App.css';
+
+const trackingId = "UA-165953822-1";
+ReactGA.initialize(trackingId);
+const history = createBrowserHistory();
+
+// Initialize google analytics page view tracking
+history.listen(location => {
+  ReactGA.set({ page: location.pathname }); // Update the user's current page
+  ReactGA.pageview(location.pathname); // Record a pageview for the given page
+});
 
 function App(props) {
   const [isLoaded, setIsLoaded] = useState([]);
@@ -17,7 +30,6 @@ function App(props) {
   // const headerCatagories = [
   //   'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
   // ];
-
   async function handleSearchSubmit(e) {
     e.preventDefault();
     //console.log(search);

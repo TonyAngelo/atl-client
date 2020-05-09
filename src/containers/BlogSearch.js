@@ -11,8 +11,9 @@ import SearchPost from "../components/SearchPost";
 export default function BlogSearch(props) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(10);
+  //const [pages, setPages] = useState(10);
   
+  const pages = 100;
   let blogQuery = `search?search=${props.match.params.search}&page=${page}&per_page=${pages}&subtype=post,people,sources,theories&_embed`;
 
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function BlogSearch(props) {
         const response = await fetch(apiHeader + blogQuery);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload)
+          //console.log(payload)
           setData(payload);
         } 
       } catch (e) {

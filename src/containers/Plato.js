@@ -8,8 +8,8 @@ import SidebarDialogue from "../components/SidebarDialogue";
 //import "./Home.css";
 
 export default function Plato(props) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  //const [title, setTitle] = useState("");
+  //const [content, setContent] = useState("");
   const [writing, setWriting] = useState([]);
   const [atlantis, setAtlantis]= useState([]);
   const [data, setData] = useState([]);
@@ -26,7 +26,7 @@ export default function Plato(props) {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload)
+          //console.log(payload)
           setData(payload);
           //setTitle(payload[0].title.rendered);
           //setContent(payload[0].content.rendered);

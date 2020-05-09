@@ -7,9 +7,11 @@ import TiledPostPage from "../components/TiledPostPage";
 
 export default function Theories(props) {
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(24);
+  //const [page, setPage] = useState(1);
+  //const [pages, setPages] = useState(100);
 
+  const page = 1;
+  const pages = 100;
   let queryStr = `theory?_embed&order=asc&page=${page}&per_page=${pages}`;
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function Theories(props) {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload);
+          //console.log(payload);
           setData(payload);
         } 
       } catch (e) {
