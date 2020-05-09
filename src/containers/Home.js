@@ -67,7 +67,7 @@ export default function Home(props) {
           />
         : <MyJumbotron 
             title = "Atlantis FYI"
-            text = "A compendium of Atlantis information."
+            text = "Sources, Analysis, and Hot Takes concerning Plato's Lost Island of Atlantis."
           />
       }
   	  <Row className="mb-2">
