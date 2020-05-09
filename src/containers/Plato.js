@@ -14,7 +14,7 @@ export default function Plato(props) {
   const [atlantis, setAtlantis]= useState([]);
   const [data, setData] = useState([]);
 
-  const queryStr = "person?_embed&slug=plato&order=asc";
+  const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing";
 
   useEffect(() => {
     async function onLoad() {
@@ -26,7 +26,7 @@ export default function Plato(props) {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          //console.log(payload)
+          console.log(payload)
           setData(payload);
           //setTitle(payload[0].title.rendered);
           //setContent(payload[0].content.rendered);

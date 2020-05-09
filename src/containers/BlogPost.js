@@ -11,23 +11,69 @@ import SidebarSection from "../components/SidebarSection";
 
 export default function BlogPost(props) {
   const [data, setData] = useState([]);
-  let queryStr = `posts?slug=${props.match.params.post}&_embed`;
+  const [image, setImage] = useState({});
+  const [category, setCategory] = useState([]);
+  const [tags, setTags] = useState([]);
+  let queryStr = `posts?slug=${props.match.params.post}&_fields=title,date,content,slug,excerpt,_links`;
   
   useEffect(() => {
     async function onLoad() {
+      let payload = [];
+      let response = "";
+      let imageLink = "";
+      let catLink = "";
+      let tagLink = "";
       props.setIsLoaded(false);
       // get page content
       try {
-        const response = await fetch(apiHeader + queryStr);
+        response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
-          const payload = await response.json();
-          //console.log(payload);
+          payload = await response.json();
+          console.log(payload);
           setData(payload);
         } 
       } catch (e) {
         alert(e);
       }
+
       props.setIsLoaded(true);
+
+      imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+      catLink = payload[0]._links['wp:term'][0].href;
+      tagLink = payload[0]._links['wp:term'][1].href;
+
+      try {
+        response = await fetch(imageLink);
+        if (response.ok) { // ckeck if status code is 200
+          payload = await response.json();
+          //console.log(payload);
+          setImage(payload);
+        } 
+      } catch (e) {
+        alert(e);
+      }
+
+      try {
+        response = await fetch(catLink);
+        if (response.ok) { // ckeck if status code is 200
+          payload = await response.json();
+          console.log(payload);
+          setCategory(payload);
+        } 
+      } catch (e) {
+        alert(e);
+      }
+
+      try {
+        response = await fetch(tagLink);
+        if (response.ok) { // ckeck if status code is 200
+          payload = await response.json();
+          console.log(payload);
+          setTags(payload);
+        } 
+      } catch (e) {
+        alert(e);
+      }
     }
 
     onLoad();
@@ -46,37 +92,16 @@ export default function BlogPost(props) {
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>
-            <Col lg={8}>
+            <Col className="d-none d-lg-block" lg={1} xl={2}></Col>
+            <Col lg={10} xl={8}>
               <BlogSection
                 data={data[0]}
+                image={image}
+                cats={category}
+                tags={tags}
               />
             </Col>
-            <Col lg={4}>
-              {data[0].post_theories
-                ? <SidebarSection
-                    data = {data[0].post_theories}
-                    titleSingle = "Theory"
-                    titleMultiple = "Theories"
-                  />
-                : null
-              }
-              {data[0].post_sources
-                ? <SidebarSection
-                    data = {data[0].post_sources}
-                    titleSingle = "Source"
-                    titleMultiple = "Sources"
-                  />
-                : null
-              }
-              {data[0].post_people
-                ? <SidebarSection
-                    data = {data[0].post_people}
-                    titleSingle = "Person"
-                    titleMultiple = "People"
-                  />
-                : null
-              }
-            </Col>
+            <Col className="d-none d-lg-block" lg={1} xl={2}></Col>
           </Row>
         : null
       }

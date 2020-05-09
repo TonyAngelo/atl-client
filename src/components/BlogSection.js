@@ -13,6 +13,9 @@ export default function BlogSection({
   disabled = false,
   meta = true,
   data = {},
+  image = {},
+  cats = [],
+  tags = [],
   ...props
 }) {
   if(disabled || isLoading) {
@@ -21,10 +24,10 @@ export default function BlogSection({
   return (
       <Row className="mb-2">
         <Col>
-          {data['_embedded'] && data['_embedded']['wp:featuredmedia']
+          {image['media_details']
             ? <FeaturedImage 
-                url={data['_embedded']['wp:featuredmedia'][0]['source_url']}
-                caption={data['_embedded']['wp:featuredmedia'][0]['caption']['rendered']}
+                url={image['media_details']['sizes']['medium_large']['source_url']}
+                caption={image['caption']['rendered']}
               />
             : null
           }
@@ -36,13 +39,16 @@ export default function BlogSection({
             : null
           }
           <BlogContent>{data.content.rendered}</BlogContent>
-          <BlogFooter 
-            data={data}
-            meta={meta}
-            title={xmlParse(data.title.rendered)}
-            category={meta ? data['_embedded']['wp:term'][0][0] : null}
-            tags={meta ? data['_embedded']['wp:term'][1] : null}
-          />
+          {meta
+            ? <BlogFooter 
+                data={data}
+                meta={meta}
+                title={xmlParse(data.title.rendered)}
+                category={meta ? cats : null}
+                tags={meta ? tags : null}
+              />
+            : null
+          }
         </Col>
       </Row>
   );

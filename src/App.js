@@ -23,6 +23,7 @@ history.listen(location => {
 });
 
 function App(props) {
+  const [currentYear, setCurrentYear] = useState(2020);
   const [isLoaded, setIsLoaded] = useState([]);
   //const [navKey, setNavKey] = useState("");
   const [showSearch, setShowSearch] = useState(false);
@@ -30,6 +31,15 @@ function App(props) {
   // const headerCatagories = [
   //   'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About', 'Contact'
   // ];
+
+  useEffect(() => {
+    async function onLoad() {
+      let d = new Date
+      setCurrentYear(d.getYear()+1900);
+    }
+    onLoad();
+  }, []);
+
   async function handleSearchSubmit(e) {
     e.preventDefault();
     //console.log(search);
@@ -94,7 +104,16 @@ function App(props) {
       </Container>
       <footer className="blog-footer">
         <p>
-          <Link to="#home">Back to top</Link>
+          <div><Link to="#home">Back to top</Link></div>
+          <div className="blog-header-logo text-dark">Atlantis FYI</div>
+
+            <Nav variant="pills" className="d-flex justify-content-center">
+              {headerCategories.map((item, index) => 
+                <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}><Nav.Link active={false} className="p-2 text-muted">{item}</Nav.Link></LinkContainer>
+              )}
+            </Nav>
+
+          <div className="footerCopyright">© {currentYear} atlantis.fyi</div>
         </p>
       </footer>
     </div>
