@@ -103,18 +103,14 @@ function App(props) {
         <Routes appProps={{ isLoaded, setIsLoaded }} />
       </Container>
       <footer className="blog-footer">
-        <p>
-          <div><Link to="#home">Back to top</Link></div>
-          <div className="blog-header-logo text-dark">Atlantis FYI</div>
-
-            <Nav variant="pills" className="d-flex justify-content-center">
-              {headerCategories.map((item, index) => 
-                <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}><Nav.Link active={false} className="p-2 text-muted">{item}</Nav.Link></LinkContainer>
-              )}
-            </Nav>
-
-          <div className="footerCopyright">© {currentYear} atlantis.fyi</div>
-        </p>
+        <div><Link to="#home">Back to top</Link></div>
+        <div className="blog-header-logo text-dark">Atlantis FYI</div>
+        <Nav variant="pills" className="d-flex justify-content-center">
+          {headerCategories.map((item, index) => 
+            <LinkContainer key={index} to={"/" + item.toLowerCase().replace(' ', '-')}><Nav.Link active={false} className="p-2 text-muted">{item}</Nav.Link></LinkContainer>
+          )}
+        </Nav>
+        <div className="footerCopyright">© {currentYear} atlantis.fyi</div>
       </footer>
     </div>
   );

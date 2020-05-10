@@ -25,14 +25,14 @@ export default function SidebarSection({
     <div>
       <SidebarTitle>{data.length > 1 ? "Relevant " + titleMultiple : "Relevant " + titleSingle}</SidebarTitle>
       {data.sort(function(a, b) {
-          var dateA = new Date(a.post_date), dateB = new Date(b.post_date);
+          var dateA = new Date(a.date), dateB = new Date(b.date);
           return dateB - dateA;
         }).map((item, index) =>
         <SidebarPost
           key = {index}
-          title = {item.post_title}
-          text = {item.post_excerpt}
-          link = {"/" + path + "/" + item.post_name}
+          title = {item.title.rendered}
+          text = {item.excerpt.rendered}
+          link = {"/" + path + "/" + item.slug}
           linkText = "Go to page">
         </SidebarPost>)}
     </div>
