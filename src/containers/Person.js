@@ -13,6 +13,7 @@ export default function Person(props) {
   const [theories, setTheories] = useState(false);
   const [sources, setSources] = useState(false);
   const [posts, setPosts] = useState(false);
+  const [image, setImage] = useState({});
 
   let queryStr = `person?slug=${props.match.params.person}`;
   let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
@@ -23,6 +24,7 @@ export default function Person(props) {
     async function onLoad() {
       let payload = [];
       let response = "";
+      let imageLink = "";
       let postIDs = [];
       //let theoryIDs = [];
       let sourceIDs = [];
@@ -40,6 +42,18 @@ export default function Person(props) {
         alert(e);
       }
       props.setIsLoaded(true);
+      imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+
+      try {
+        response = await fetch(imageLink);
+        if (response.ok) { // ckeck if status code is 200
+          const imgPayload = await response.json();
+          //console.log(payload);
+          setImage(imgPayload);
+        } 
+      } catch (e) {
+        alert(e);
+      }
 
       if(payload[0].person_posts) {
         postStr = postStr + payload[0].person_posts;
@@ -85,6 +99,7 @@ export default function Person(props) {
             <Col lg={8}>
               <BlogSection
                 meta={false}
+                image={image}
                 data={data[0]}
               />
             </Col>

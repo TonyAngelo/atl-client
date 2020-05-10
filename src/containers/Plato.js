@@ -15,8 +15,9 @@ export default function Plato(props) {
   const [atlantis, setAtlantis]= useState(false);
   const [posts, setPosts] = useState(false);
   const [data, setData] = useState([]);
+  const [image, setImage] = useState({});
 
-  const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing,person_posts";
+  const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing,person_posts,_links";
   let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
   let sourceStr = `source?_fields=title,excerpt,slug,date&page=1&per_page=100&include=`;
 
@@ -24,6 +25,7 @@ export default function Plato(props) {
     async function onLoad() {
       let payload = [];
       let response = "";
+      let imageLink = "";
       let postIDs = [];
       let sourceIDs = [];
       let atlItems = [];
@@ -54,6 +56,18 @@ export default function Plato(props) {
         alert(e);
       }
       props.setIsLoaded(true);
+      imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+
+      try {
+        response = await fetch(imageLink);
+        if (response.ok) { // ckeck if status code is 200
+          const imgPayload = await response.json();
+          //console.log(payload);
+          setImage(imgPayload);
+        } 
+      } catch (e) {
+        alert(e);
+      }
 
       if(payload[0].writing) {
         sourceStr = sourceStr + payload[0].writing;
@@ -94,6 +108,7 @@ export default function Plato(props) {
             <Col md={8}>
               <BlogSection
                 meta={false}
+                image={image}
                 data={data[0]}
               />
             </Col>

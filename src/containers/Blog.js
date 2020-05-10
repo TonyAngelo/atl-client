@@ -24,6 +24,7 @@ export default function Blog(props) {
         const response = await fetch(apiHeader + "posts" + blogQuery);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
+          console.log(payload);
           setPosts(payload);
         } 
       } catch (e) {

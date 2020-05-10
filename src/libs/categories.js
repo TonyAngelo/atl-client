@@ -14,8 +14,8 @@ export const headerValues = {
 
 export const categoryColors = {
 	3: 'text-sucess',
-	4: 'text-secondary',
-	38: 'text-warning',
+	4: 'text-warning',
+	38: 'text-secondary',
 	2: 'text-info',
 	5: 'text-danger',
 	42: 'text-primary'
