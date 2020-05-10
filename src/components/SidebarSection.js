@@ -23,7 +23,7 @@ export default function SidebarSection({
   
   return (
     <div>
-      <SidebarTitle>{data.length > 1 ? "Relevant " + titleMultiple : "Relevant " + titleSingle}</SidebarTitle>
+      <SidebarTitle>{data.length > 1 ? titleMultiple : titleSingle}</SidebarTitle>
       {data.sort(function(a, b) {
           var dateA = new Date(a.date), dateB = new Date(b.date);
           return dateB - dateA;

@@ -10,16 +10,29 @@ import SocialShare from "../components/SocialShare";
 
 export default function Person(props) {
   const [data, setData] = useState([]);
-  let queryStr = `person?&_embed&slug=${props.match.params.person}`;
+  const [theories, setTheories] = useState(false);
+  const [sources, setSources] = useState(false);
+  const [posts, setPosts] = useState(false);
+
+  let queryStr = `person?slug=${props.match.params.person}`;
+  let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
+  //let theoryStr = `theory?_fields=title,excerpt,slug,date&include=`;
+  let sourceStr = `source?_fields=title,excerpt,slug,date&page=1&per_page=100&include=`;
 
   useEffect(() => {
     async function onLoad() {
+      let payload = [];
+      let response = "";
+      let postIDs = [];
+      //let theoryIDs = [];
+      let sourceIDs = [];
+
       props.setIsLoaded(false);
       // get page content
       try {
-        const response = await fetch(apiHeader + queryStr);
+        response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
-          const payload = await response.json();
+          payload = await response.json();
           //console.log(payload);
           setData(payload);
         } 
@@ -27,6 +40,34 @@ export default function Person(props) {
         alert(e);
       }
       props.setIsLoaded(true);
+
+      if(payload[0].person_posts) {
+        postStr = postStr + payload[0].person_posts;
+        try {
+          response = await fetch(apiHeader + postStr);
+          if (response.ok) { // ckeck if status code is 200
+            postIDs = await response.json();
+            //console.log(theoryIDs);
+            setPosts(postIDs);
+          } 
+        } catch (e) {
+          alert(e);
+        }
+      }
+
+      if(payload[0].writing) {
+        sourceStr = sourceStr + payload[0].writing;
+        try {
+          response = await fetch(apiHeader + sourceStr);
+          if (response.ok) { // ckeck if status code is 200
+            sourceIDs = await response.json();
+            //console.log(theoryIDs);
+            setSources(sourceIDs);
+          } 
+        } catch (e) {
+          alert(e);
+        }
+      }
     }
 
     onLoad();
@@ -48,17 +89,17 @@ export default function Person(props) {
               />
             </Col>
             <Col lg={4}>
-              {data[0].writing
+              {sources
                 ? <SidebarSection
-                    data = {data[0].writing}
+                    data = {sources}
                     titleSingle = "Source"
                     titleMultiple = "Sources"
                   />
                 : null
               }
-              {data[0].person_posts
+              {posts
                 ? <SidebarSection
-                    data = {data[0].person_posts}
+                    data = {posts}
                     titleSingle = "Post"
                     titleMultiple = "Posts"
                     linkPath = "blog"

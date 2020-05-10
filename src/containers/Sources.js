@@ -11,7 +11,7 @@ export default function Sources(props) {
   //const [pages, setPages] = useState(100);
 
   const pages = 100;
-  let queryStr = `source?&order=asc&page=${page}&per_page=${pages}&_embed&_fields=title,excerpt,slug,date,source_author,source_translator`;
+  let queryStr = `source?&order=asc&page=${page}&per_page=${pages}&_fields=title,excerpt,slug,date,source_author,source_translator`;
 
   useEffect(() => {
     async function onLoad() {
@@ -21,7 +21,7 @@ export default function Sources(props) {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           const payload = await response.json();
-          console.log(payload);
+          //console.log(payload);
           setData(payload);
         } 
       } catch (e) {

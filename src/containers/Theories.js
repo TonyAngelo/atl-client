@@ -12,7 +12,7 @@ export default function Theories(props) {
 
   const page = 1;
   const pages = 100;
-  let queryStr = `theory?_embed&order=asc&page=${page}&per_page=${pages}`;
+  let queryStr = `theory?order=asc&page=${page}&per_page=${pages}&_fields=title,excerpt,slug,date`;
 
   useEffect(() => {
     async function onLoad() {

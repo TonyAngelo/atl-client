@@ -5,45 +5,78 @@ import StandardHelmet from "../components/StandardHelmet";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarDialogue from "../components/SidebarDialogue";
+import SidebarSection from "../components/SidebarSection";
 //import "./Home.css";
 
 export default function Plato(props) {
   //const [title, setTitle] = useState("");
   //const [content, setContent] = useState("");
-  const [writing, setWriting] = useState([]);
-  const [atlantis, setAtlantis]= useState([]);
+  const [writing, setWriting] = useState(false);
+  const [atlantis, setAtlantis]= useState(false);
+  const [posts, setPosts] = useState(false);
   const [data, setData] = useState([]);
 
-  const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing";
+  const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing,person_posts";
+  let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
+  let sourceStr = `source?_fields=title,excerpt,slug,date&page=1&per_page=100&include=`;
 
   useEffect(() => {
     async function onLoad() {
-      props.setIsLoaded(false);
+      let payload = [];
+      let response = "";
+      let postIDs = [];
+      let sourceIDs = [];
       let atlItems = [];
       let otherItems = [];
+
+      props.setIsLoaded(false);
+      
       // get page content
       try {
-        const response = await fetch(apiHeader + queryStr);
+        response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
-          const payload = await response.json();
+          payload = await response.json();
           console.log(payload)
           setData(payload);
           //setTitle(payload[0].title.rendered);
           //setContent(payload[0].content.rendered);
-          payload[0].writing.map(function(item, index) {
-            if(item.post_name === "critias" || item.post_name === "timaeus") {
-              atlItems.push(item);
-            } else {
-              otherItems.push(item);
-            }
-          });
-          setAtlantis(atlItems);
-          setWriting(otherItems);
+          // payload[0].writing.map(function(item, index) {
+          //   if(item.post_name === "critias" || item.post_name === "timaeus") {
+          //     atlItems.push(item);
+          //   } else {
+          //     otherItems.push(item);
+          //   }
+          // });
+          // setAtlantis(atlItems);
+          // setWriting(otherItems);
         } 
       } catch (e) {
         alert(e);
       }
       props.setIsLoaded(true);
+
+      if(payload[0].writing) {
+        sourceStr = sourceStr + payload[0].writing;
+        try {
+          response = await fetch(apiHeader + sourceStr);
+          if (response.ok) { // ckeck if status code is 200
+            sourceIDs = await response.json();
+            console.log(sourceIDs);
+            //setWriting(sourceIDs);
+            sourceIDs.map(function(item, index) {
+              if(item.slug === "critias" || item.slug === "timaeus") {
+                atlItems.push(item);
+              } else {
+                otherItems.push(item);
+              }
+            });
+            setAtlantis(atlItems);
+            setWriting(otherItems);
+          } 
+        } catch (e) {
+          alert(e);
+        }
+      }
     }
 
     onLoad();
@@ -65,30 +98,24 @@ export default function Plato(props) {
               />
             </Col>
             <Col md={4}>
-              <div className="p-3 mb-3 bg-light rounded">
-                <h4 className="font-italic">Atlantis dialogues</h4>
-              </div>
-              {atlantis.map((item, index) => 
-                <SidebarDialogue
-                  key = {index}
-                  title = {item.post_title}
-                  text = {item.post_excerpt}
-                  link = {"/sources/" + item.post_name}
-                  linkText = "Go to dialogue">
-                </SidebarDialogue>
-              )}
-              <div className="p-3 mb-3 bg-light rounded">
-                <h4 className="font-italic">Related Sources</h4>
-              </div>
-              {writing.map((item, index) => 
-                <SidebarDialogue
-                  key = {index}
-                  title = {item.post_title}
-                  text = {item.post_excerpt}
-                  link = {"/sources/" + item.post_name}
-                  linkText = "Go to source">
-                </SidebarDialogue>
-              )}
+              {atlantis
+                ? <SidebarSection
+                    data = {atlantis}
+                    titleSingle = "Atlantis dialogue"
+                    titleMultiple = "Atlantis dialogues"
+                    linkPath = "source"
+                  />
+                : null
+              }
+              {writing
+                ? <SidebarSection
+                    data = {writing}
+                    titleSingle = "Related Source"
+                    titleMultiple = "Related Sources"
+                    linkPath = "source"
+                  />
+                : null
+              }
             </Col>
           </Row>
         : null

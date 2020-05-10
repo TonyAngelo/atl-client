@@ -12,7 +12,7 @@ export default function People(props) {
 
   const page = 1;
   const pages = 100;
-  let queryStr = `person?&order=asc&page=${page}&per_page=${pages}&exclude=100&_embed`;
+  let queryStr = `person?order=asc&page=${page}&per_page=${pages}&exclude=100&_fields=title,excerpt,slug,date`;
 
   useEffect(() => {
     async function onLoad() {
