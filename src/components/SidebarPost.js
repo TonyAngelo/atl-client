@@ -25,7 +25,7 @@ export default function SidebarPost({
           : null
         }
         <h4 className="mb-2">
-          <Link to={link} className="text-dark">{title}</Link>
+          <Link to={link} className="text-dark" dangerouslySetInnerHTML={{ __html: title }}></Link>
         </h4>
         <div dangerouslySetInnerHTML={{ __html: text }} />
         <div className="text-right w-100 mt-2"><Link to={link}>{linkText}</Link></div>
