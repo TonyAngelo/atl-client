@@ -13,12 +13,21 @@ export const headerValues = {
 };
 
 export const categoryColors = {
-	3: 'text-sucess',
+	3: 'text-success',
 	4: 'text-warning',
 	38: 'text-secondary',
 	2: 'text-info',
 	5: 'text-danger',
 	42: 'text-primary'
+}
+
+export const categoryBadge = {
+	3: 'success',
+	4: 'warning',
+	38: 'secondary',
+	2: 'info',
+	5: 'danger',
+	42: 'primary'
 }
 
 export const categoryNames = {
@@ -50,8 +59,8 @@ export const categoryNameColors = {
 
 export const searchColors = {
 	'post': 'text-primary',
-	'people': 'text-warning',
-	'sources':'text-secondary',
+	'people': 'text-secondary',
+	'sources':'text-warning',
 	'theories': 'text-sucess'
 }
 
