@@ -24,13 +24,19 @@ export default function BlogSection({
   return (
       <Row className="mb-2">
         <Col>
-          {image['media_details']
+          {image['media_details'] && image['media_details']['sizes']['medium_large']
             ? <FeaturedImage 
                 url={image['media_details']['sizes']['medium_large']['source_url']}
                 caption={image['caption']['rendered']}
               />
-            : null
+            : image['media_details']
+              ? <FeaturedImage 
+                  url={image['media_details']['sizes']['full']['source_url']}
+                  caption={image['caption']['rendered']}
+                />
+              : null
           }
+
           {meta
             ? <BlogMeta 
                 date={data.date}

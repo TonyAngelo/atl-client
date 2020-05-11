@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import MyJumbotron from "../components/Jumbotron";
 import FeaturedPost from "../components/FeaturedPost";
 import SummaryPost from "../components/SummaryPost";
+import SidebarSection from "../components/SidebarSection";
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
 //import "./Home.css";
@@ -11,20 +12,24 @@ import StandardHelmet from "../components/StandardHelmet";
 export default function Home(props) {
   const [sticky, setSticky] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [sources, setSources] = useState(false);
   const jumboOn = false;
-  const stickyQuery = "?page=1&per_page=2&sticky=true&_embed&_fields=id,categories,title,date,excerpt,slug,sticky";
-  let blogQuery = "?page=1&per_page=5&_embed&_fields=categories,title,date,excerpt,slug,sticky";
+  const stickyQuery = "posts?page=1&per_page=2&sticky=true&_fields=id,categories,title,date,excerpt,slug,sticky";
+  let blogQuery = "posts?page=1&per_page=5&_fields=categories,title,date,excerpt,slug,sticky";
   //const sideBarQuery = "?page=1&per_page=1&_fields=categories,title,excerpt,slug";
+  let sourceStr = `source?_fields=title,excerpt,slug,date&include=99,98`;
 
   useEffect(() => {
     async function onLoad() {
+      let payload = [];
+      let response = "";
       props.setIsLoaded(false);
       //props.setNavKey("");
       // get sticky
       try {
-        const response = await fetch(apiHeader + "posts" + stickyQuery);
+        response = await fetch(apiHeader + stickyQuery);
         if (response.ok) { // ckeck if status code is 200
-          const payload = await response.json();
+          payload = await response.json();
           //console.log(payload);
           if(payload.length > 0) {
             blogQuery = blogQuery + "&exclude="
@@ -35,18 +40,31 @@ export default function Home(props) {
       } catch (e) {
         alert(e);
       }
+
+      props.setIsLoaded(true);
+
       // get posts
       try {
-        const response = await fetch(apiHeader + "posts" + blogQuery);
+        response = await fetch(apiHeader + blogQuery);
         if (response.ok) { // ckeck if status code is 200
-          const payload = await response.json();
+          payload = await response.json();
           //console.log(payload);
           setPosts(payload);
         } 
       } catch (e) {
         alert(e);
       }
-      props.setIsLoaded(true);
+      
+      try {
+        response = await fetch(apiHeader + sourceStr);
+        if (response.ok) { // ckeck if status code is 200
+          payload = await response.json();
+          //console.log(sourceIDs);
+          setSources(payload);
+        } 
+      } catch (e) {
+        alert(e);
+      }
     }
 
     onLoad();
@@ -86,9 +104,8 @@ export default function Home(props) {
         }
   	  </Row>
 	    <Row>
-        <Col className="d-none d-lg-block" lg={1}></Col>
         {posts.length > 0
-	        ? <Col lg={10} className="blog-main">
+	        ? <Col lg={8} className="blog-main">
     	        <h3 className="pb-3 my-4 font-italic border-bottom">
     	          Dialogue
     	        </h3>
@@ -112,7 +129,17 @@ export default function Home(props) {
     	      </Col>
           : null
         }
-        <Col className="d-none d-lg-block" lg={1}></Col>
+        <Col md={4}>
+        {sources
+          ? <SidebarSection
+              data = {sources}
+              titleSingle = "Atlantis dialogue"
+              titleMultiple = "Atlantis dialogues"
+              linkPath = "source"
+            />
+          : null
+        }
+        </Col>
 	    </Row>
 	  </main>
   );

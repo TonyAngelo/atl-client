@@ -38,7 +38,7 @@ export default function Plato(props) {
         response = await fetch(apiHeader + queryStr);
         if (response.ok) { // ckeck if status code is 200
           payload = await response.json();
-          console.log(payload)
+          //console.log(payload)
           setData(payload);
           //setTitle(payload[0].title.rendered);
           //setContent(payload[0].content.rendered);
@@ -62,7 +62,7 @@ export default function Plato(props) {
         response = await fetch(imageLink);
         if (response.ok) { // ckeck if status code is 200
           const imgPayload = await response.json();
-          //console.log(payload);
+          //console.log(imgPayload);
           setImage(imgPayload);
         } 
       } catch (e) {
@@ -75,7 +75,7 @@ export default function Plato(props) {
           response = await fetch(apiHeader + sourceStr);
           if (response.ok) { // ckeck if status code is 200
             sourceIDs = await response.json();
-            console.log(sourceIDs);
+            //console.log(sourceIDs);
             //setWriting(sourceIDs);
             sourceIDs.map(function(item, index) {
               if(item.slug === "critias" || item.slug === "timaeus") {
@@ -84,6 +84,7 @@ export default function Plato(props) {
                 otherItems.push(item);
               }
             });
+            //console.log(atlItems);
             setAtlantis(atlItems);
             setWriting(otherItems);
           } 
