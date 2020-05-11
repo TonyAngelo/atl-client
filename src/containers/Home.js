@@ -164,7 +164,7 @@ export default function Home(props) {
           </div>
           <SidebarTitle>Blog Tags</SidebarTitle>
           <div>
-            {tags.map((item, index) => <Link key={index} to={"/tag/"+item.slug}><Badge className="tagLink m-2" variant={"primary"}>{item.name}</Badge></Link>)}
+            {tags.map((item, index) => <Link key={index} to={"/tag/"+item.slug}><Badge className="tagLink m-1" variant={"primary"}>{item.name}</Badge></Link>)}
           </div>
         </Col>
 	    </Row>
