@@ -38,97 +38,71 @@ export default function BlogPost(props) {
           payload = await response.json();
           //console.log(payload);
           setData(payload);
-        } 
-      } catch (e) {
-        alert(e);
-      }
 
-      props.setIsLoaded(true);
-      imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+          props.setIsLoaded(true);
+          imageLink = payload[0]._links['wp:featuredmedia'][0].href;
 
-      try {
-        response = await fetch(imageLink);
-        if (response.ok) { // ckeck if status code is 200
-          const imgPayload = await response.json();
-          //console.log(payload);
-          setImage(imgPayload);
-        } 
-      } catch (e) {
-        alert(e);
-      }
-
-      catLink = payload[0]._links['wp:term'][0].href;
-      tagLink = payload[0]._links['wp:term'][1].href;
-      let souceIDs = [];
-      let theoryIDs = [];
-      let peopleIDs = [];
-
-      if(payload[0].post_sources) {
-        sourceStr = sourceStr + payload[0].post_sources;
-        try {
-          response = await fetch(apiHeader + sourceStr);
+          response = await fetch(imageLink);
           if (response.ok) { // ckeck if status code is 200
-            souceIDs = await response.json();
-            //console.log(sourceIDs);
-            setSources(souceIDs);
+            const imgPayload = await response.json();
+            //console.log(payload);
+            setImage(imgPayload);
           } 
-        } catch (e) {
-          alert(e);
-        }
-      }
 
-      if(payload[0].post_theories) {
-        theoryStr = theoryStr + payload[0].post_theories;
-        try {
-          response = await fetch(apiHeader + theoryStr);
+          catLink = payload[0]._links['wp:term'][0].href;
+          tagLink = payload[0]._links['wp:term'][1].href;
+          let souceIDs = [];
+          let theoryIDs = [];
+          let peopleIDs = [];
+
+          if(payload[0].post_sources) {
+            sourceStr = sourceStr + payload[0].post_sources;
+            response = await fetch(apiHeader + sourceStr);
+            if (response.ok) { // ckeck if status code is 200
+              souceIDs = await response.json();
+              //console.log(sourceIDs);
+              setSources(souceIDs);
+            } 
+          }
+
+          if(payload[0].post_theories) {
+            theoryStr = theoryStr + payload[0].post_theories;
+            response = await fetch(apiHeader + theoryStr);
+            if (response.ok) { // ckeck if status code is 200
+              theoryIDs = await response.json();
+              //console.log(theoryIDs);
+              setTheories(theoryIDs);
+            } 
+          }
+
+          if(payload[0].post_people) {
+            personStr = personStr + payload[0].post_people;
+            response = await fetch(apiHeader + personStr);
+            if (response.ok) { // ckeck if status code is 200
+              peopleIDs = await response.json();
+              //console.log(peopleIDs);
+              setPeople(peopleIDs);
+            } 
+          }
+
+          response = await fetch(catLink);
           if (response.ok) { // ckeck if status code is 200
-            theoryIDs = await response.json();
-            //console.log(theoryIDs);
-            setTheories(theoryIDs);
+            payload = await response.json();
+            //console.log(payload);
+            setCategory(payload);
           } 
-        } catch (e) {
-          alert(e);
-        }
-      }
 
-      if(payload[0].post_people) {
-        personStr = personStr + payload[0].post_people;
-        try {
-          response = await fetch(apiHeader + personStr);
+          response = await fetch(tagLink);
           if (response.ok) { // ckeck if status code is 200
-            peopleIDs = await response.json();
-            //console.log(peopleIDs);
-            setPeople(peopleIDs);
-          } 
-        } catch (e) {
-          alert(e);
-        }
-      }
-
-
-      try {
-        response = await fetch(catLink);
-        if (response.ok) { // ckeck if status code is 200
-          payload = await response.json();
-          //console.log(payload);
-          setCategory(payload);
-        } 
-      } catch (e) {
-        alert(e);
-      }
-
-      try {
-        response = await fetch(tagLink);
-        if (response.ok) { // ckeck if status code is 200
-          payload = await response.json();
-          //console.log(payload);
-          setTags(payload);
+            payload = await response.json();
+            //console.log(payload);
+            setTags(payload);
+          }
         } 
       } catch (e) {
         alert(e);
       }
     }
-
     onLoad();
   }, [queryStr]);
 

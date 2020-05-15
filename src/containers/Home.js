@@ -78,7 +78,7 @@ export default function Home(props) {
         response = await fetch(apiHeader + tagStr);
         if (response.ok) { // ckeck if status code is 200
           payload = await response.json();
-          console.log(payload);
+          //console.log(payload);
           setTags(payload);
         } 
       } catch (e) {
@@ -141,7 +141,7 @@ export default function Home(props) {
               )}
               {posts.length > 5
                 ? <nav className="blog-pagination">
-        	          <Link className="btn btn-outline-primary" to="/blog#more">See More Posts</Link>
+        	          <Link className="btn btn-outline-primary" to="/blog#more">More Posts</Link>
         	        </nav>
                 : null
               }

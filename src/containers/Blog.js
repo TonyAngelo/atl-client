@@ -18,56 +18,89 @@ export default function Blog(props) {
   const [tags, setTags] = useState([]);
   //const [pages, setPages] = useState(10);
 
-  const pages = 100;
-  let blogQuery = `?page=${page}&per_page=${pages}&_fields=categories,title,date,excerpt,slug,sticky`;
+  const pages = 10;
+  let blogQuery = ``;
   let sourceStr = `source?_fields=title,excerpt,slug,date&include=99,98`;
   let tagStr = `tags?_fields=count,name,slug&page=1&per_page=100&hide_empty=true`;
 
+  async function routeToBlog(){
+    props.history.push("/blog");
+  }
+
+  //console.log(props);
+
   useEffect(() => {
     async function onLoad() {
+      //console.log('load');
       let payload = [];
       let response = "";
+      if(props.match.params.page){
+        setPage(parseInt(props.match.params.page))
+        blogQuery = `posts?page=${props.match.params.page}&per_page=${pages}&_fields=categories,title,date,excerpt,slug`;
+      } else {
+        setPage(1)
+        blogQuery = `posts?page=1&per_page=${pages}&_fields=categories,title,date,excerpt,slug`;
+      }
       props.setIsLoaded(false);
       // get posts
       try {
-        response = await fetch(apiHeader + "posts" + blogQuery);
-        if (response.ok) { // ckeck if status code is 200
+        response = await fetch(apiHeader + blogQuery);
+        //console.log(response)
+        if (response.status === 200) { // ckeck if status code is 200
           payload = await response.json();
           //console.log(payload);
           setPosts(payload);
-        } 
+
+          response = await fetch(apiHeader + sourceStr);
+          if (response.ok) { // ckeck if status code is 200
+            payload = await response.json();
+            //console.log(sourceIDs);
+            setSources(payload);
+          } 
+
+          response = await fetch(apiHeader + tagStr);
+          if (response.ok) { // ckeck if status code is 200
+            payload = await response.json();
+            //console.log(payload);
+            setTags(payload);
+          } 
+
+        } else if(response.status === 400){
+          routeToBlog()
+
+        }
       } catch (e) {
         alert(e);
       }
       props.setIsLoaded(true);
 
       // get sources
-      try {
-        response = await fetch(apiHeader + sourceStr);
-        if (response.ok) { // ckeck if status code is 200
-          payload = await response.json();
-          //console.log(sourceIDs);
-          setSources(payload);
-        } 
-      } catch (e) {
-        alert(e);
-      }
+      // try {
+      //   response = await fetch(apiHeader + sourceStr);
+      //   if (response.ok) { // ckeck if status code is 200
+      //     payload = await response.json();
+      //     //console.log(sourceIDs);
+      //     setSources(payload);
+      //   } 
+      // } catch (e) {
+      //   alert(e);
+      // }
 
       // get tags
-      try {
-        response = await fetch(apiHeader + tagStr);
-        if (response.ok) { // ckeck if status code is 200
-          payload = await response.json();
-          console.log(payload);
-          setTags(payload);
-        } 
-      } catch (e) {
-        alert(e);
-      }
+      // try {
+      //   response = await fetch(apiHeader + tagStr);
+      //   if (response.ok) { // ckeck if status code is 200
+      //     payload = await response.json();
+      //     //console.log(payload);
+      //     setTags(payload);
+      //   } 
+      // } catch (e) {
+      //   alert(e);
+      // }
     }
 
     onLoad();
-  }, [blogQuery]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -90,6 +123,16 @@ export default function Blog(props) {
                   link = {"/blog/" + post.slug}>
                 </SummaryPost>
               )}
+              {page > 1
+                ? <nav className="blog-pagination">
+                    <Link className="btn btn-outline-primary" to={page === 2 ? "/blog" : "/blog/old/" + (page - 1)}>Newer Posts</Link>
+                    <Link className={posts.length === pages ? "btn btn-outline-primary" : "btn btn-outline-primary disabled"} to={posts.length === pages ? "/blog/old/" + (page + 1) : "/blog"}>Older Posts</Link>
+                  </nav>
+                : <nav className="blog-pagination">
+                    <Link className="btn btn-outline-primary disabled" to={"/"}>Newer Posts</Link>
+                    <Link className={posts.length === pages ? "btn btn-outline-primary" : "btn btn-outline-primary disabled"} to={posts.length === pages ? "/blog/old/" + (page + 1) : "/blog"}>Older Posts</Link>
+                  </nav>
+              }
     	      </Col>
           : null
         }

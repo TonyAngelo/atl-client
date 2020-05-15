@@ -26,6 +26,7 @@ export default function Routes({ appProps }) {
     <Switch>
       <AppliedRoute path="/" exact component={Home} appProps={appProps} />
       <AppliedRoute path="/blog" exact component={Blog} appProps={appProps} />
+      <AppliedRoute path="/blog/old/:page" exact component={Blog} appProps={appProps} />
       <AppliedRoute path="/blog/category/:category" exact component={BlogCategory} appProps={appProps} />
       <AppliedRoute path="/blog/tag/:tag" exact component={BlogTag} appProps={appProps} />
       <AppliedRoute path="/blog/:post" exact component={BlogPost} appProps={appProps} />
