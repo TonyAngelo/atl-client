@@ -52,7 +52,7 @@ export default function Sources(props) {
       />
       <PageTitle loaded={props.isLoaded}>Sources</PageTitle>
       <Row className="mb-4">
-        <Col className="tile-filters"> 
+        <Col xs={6} className="tile-filters"> 
           <Nav 
            
            variant="pills"
@@ -70,18 +70,14 @@ export default function Sources(props) {
             </Nav.Item>
           </Nav>
         </Col>
-        <Col className="tile-filters"> 
+        <Col xs={6} className="tile-filters"> 
           <Nav 
            className="justify-content-end"
            variant="pills"
            defaultActiveKey="asc"
            onSelect={changeSortDirection}
           >
-            <Nav.Item>
-              <Nav.Link eventKey="disabled" disabled>
-                Sort direction
-              </Nav.Link>
-            </Nav.Item>
+            
             {["asc","desc"].map((item, index) => 
               <Nav.Item key={index}>
                 <Nav.Link eventKey={item}>{item}</Nav.Link>
