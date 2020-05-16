@@ -188,6 +188,15 @@ blockquote em{
   text-decoration: underline;
 }
 
+.tile-filters .nav.nav-pills .nav-link {
+  padding: .25rem 1rem; 
+}
+
+.tile-filters .nav.nav-pills .nav-link.active {
+  background-color: #007bff;
+  text-decoration: none;
+}
+
 .flex-auto {
   -ms-flex: 0 0 auto;
   -webkit-box-flex: 0;
