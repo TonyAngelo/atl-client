@@ -16,8 +16,8 @@ export default function Timeline(props) {
   ];
 
   const rows = [
-    ["Egyptian", "12th Dynasty", new Date(-1991, 0, 2), new Date(-1802, 0, 1)],
-    ["Egyptian", "13th Dynasty", new Date(-1802, 0, 2), new Date(-1649, 0, 1)],
+    //["Egyptian", "12th Dynasty", new Date(-1991, 0, 2), new Date(-1802, 0, 1)],
+    //["Egyptian", "13th Dynasty", new Date(-1802, 0, 2), new Date(-1649, 0, 1)],
     ["Egyptian", "14th Dynasty", new Date(-1725, 0, 2), new Date(-1650, 0, 1)],
     ["Egyptian", "15th Dynasty", new Date(-1650, 0, 2), new Date(-1550, 0, 1)],
     ["Egyptian", "Abydos", new Date(-1650, 0, 2), new Date(-1600, 0, 1)],
@@ -26,14 +26,42 @@ export default function Timeline(props) {
     ["Egyptian", "18th Dynasty", new Date(-1550, 0, 2), new Date(-1292, 0, 1)],
     ["Egyptian", "19th Dynasty", new Date(-1292, 0, 2), new Date(-1189, 0, 1)],
     ["Egyptian", "20th Dynasty", new Date(-1189, 0, 2), new Date(-1077, 0, 1)],
-    ["Hittite", "1st Dynasty", new Date(-2000, 0, 1), new Date(-1200, 0, 1)],
-    ["Minoan", "2nd Dynasty", new Date(-2000, 0, 1), new Date(-1700, 0, 1)]
+    ["Egyptian Notes", 'First "Sea Peoples" invasion', new Date(-1208, 0, 2), new Date(-1208, 11, 30)],
+    ["Egyptian Notes", 'Second "Sea Peoples" invasion', new Date(-1177, 0, 2), new Date(-1177, 11, 30)],
+    //["Mycenaean", "Middle Helladic I", new Date(-2000, 0, 2), new Date(-1900, 0, 1)],
+    //["Mycenaean", "Middle Helladic II", new Date(-1900, 0, 2), new Date(-1700, 0, 1)],
+    ["Mycenaean", "MHIII", new Date(-1700, 0, 2), new Date(-1550, 0, 1)],
+    ["Mycenaean", "LHIA", new Date(-1550, 0, 2), new Date(-1500, 0, 1)],
+    ["Mycenaean", "LHIB", new Date(-1500, 0, 2), new Date(-1450, 0, 1)],
+    ["Mycenaean", "LHII", new Date(-1450, 0, 2), new Date(-1400, 0, 1)],
+    ["Mycenaean", "LHIIIA", new Date(-1400, 0, 2), new Date(-1300, 0, 1)],
+    ["Mycenaean", "LHIIIB", new Date(-1300, 0, 2), new Date(-1200, 0, 1)],
+    ["Mycenaean", "LHIIIC", new Date(-1200, 0, 2), new Date(-1100, 0, 1)],
+    ["Mycenaean Notes", "End of Trojan War", new Date(-1208, 0, 2), new Date(-1208, 11, 30)],
+    //["Minoan", "Protopalatial MMIB", new Date(-1900, 0, 1), new Date(-1800, 0, 1)],
+    //["Minoan", "Protopalatial MMIIA", new Date(-1800, 0, 1), new Date(-1750, 0, 1)],
+    //["Minoan", "Neopalatial MMIIB", new Date(-1750, 0, 1), new Date(-1700, 0, 1)],
+    ["Minoan", "MMIIIA", new Date(-1700, 0, 1), new Date(-1650, 0, 1)],
+    ["Minoan", "MMIIIB", new Date(-1650, 0, 1), new Date(-1600, 0, 1)],
+    ["Minoan", "LMIA", new Date(-1600, 0, 1), new Date(-1500, 0, 1)],
+    ["Minoan", "LMIB", new Date(-1500, 0, 1), new Date(-1450, 0, 1)],
+    ["Minoan", "LMII", new Date(-1450, 0, 1), new Date(-1400, 0, 1)],
+    ["Minoan", "LMIIIA", new Date(-1400, 0, 1), new Date(-1350, 0, 1)],
+    ["Minoan", "LMIIIB", new Date(-1350, 0, 1), new Date(-1100, 0, 1)],
+    ["Minoan Notes", "Palaces Destroyed", new Date(-1450, 0, 1), new Date(-1450, 11, 30)],
+    ["Hittite", "Old Kingdom", new Date(-1700, 0, 1), new Date(-1400, 0, 1)],
+    ["Hittite", "Middle Kingdom", new Date(-1400, 0, 1), new Date(-1200, 0, 1)],
   ];
 
   const options = {
     title: "Age vs. Weight comparison",
-    colors: ['#DDDD00', '#DDDD00', '#DD0000', '#DD0000', '#DD0000', '#DD00DD', '#DD00DD', '#DD0000', '#DD0000', 
-             '#DD0000', '#000000', '#000000']
+    colors: ['#DDDD00', '#DDDD00', '#DDDD00', '#DDDD00', '#DDDD00', '#DD00DD', '#DD00DD', '#00DDDD', // egypt
+             '#000000', '#000000', 
+             '#00DD00', '#00DD00', '#00DD00', '#00DD00', '#00DD00', '#00DD00', '#00DD00', // mycenaean
+             '#000000',
+             '#0000DD', '#0000DD', '#0000DD', '#0000DD', '#0000DD', '#0000DD', '#0000DD', // minoan
+             '#000000',
+             '#DD0000', '#DD0000',]
   };
 
   useEffect(() => {
@@ -61,7 +89,7 @@ export default function Timeline(props) {
   return (
     <main>
       
-      <PageTitle loaded={props.isLoaded}>Timeline</PageTitle>
+      <PageTitle loaded={props.isLoaded}>Late Bronze Age Timeline</PageTitle>
       <Chart
         chartType="Timeline"
         data={[columns, ...rows]}

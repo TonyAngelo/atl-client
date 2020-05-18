@@ -119,7 +119,7 @@ export default function Plato(props) {
                     data = {atlantis}
                     titleSingle = "Atlantis dialogue"
                     titleMultiple = "Atlantis dialogues"
-                    linkPath = "source"
+                    linkPath = "sources"
                   />
                 : null
               }
@@ -128,7 +128,7 @@ export default function Plato(props) {
                     data = {writing}
                     titleSingle = "Related Source"
                     titleMultiple = "Related Sources"
-                    linkPath = "source"
+                    linkPath = "sources"
                   />
                 : null
               }
