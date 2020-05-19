@@ -95,7 +95,7 @@ li.list-nocheck {
   list-style-type: "\2716";
 }
 
-.html-content blockquote.wp-block-quote {
+blockquote.wp-block-quote {
   margin: 0;
   position: relative;
 }
