@@ -1,11 +1,11 @@
 export const headerCategories = [
-	'Blog', 'Theories', 'Sources', 'People', 'Plato', 'About'//, 'Contact'
+	'Blog', 'Sources', 'Theories', 'People', 'Plato', 'About'//, 'Contact'
 ];
 
 export const headerValues = {
 	'Blog': "1", 
-	'Theories': "2", 
-	'Sources': "3", 
+	'Theories': "3", 
+	'Sources': "2", 
 	'People': "4", 
 	'Plato': "5", 
 	'About': "6", 
