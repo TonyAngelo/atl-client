@@ -37,6 +37,7 @@ export default function Timeline(props) {
     ["Mycenaean", "LHIIIA", new Date(-1400, 0, 2), new Date(-1300, 0, 1)],
     ["Mycenaean", "LHIIIB", new Date(-1300, 0, 2), new Date(-1200, 0, 1)],
     ["Mycenaean", "LHIIIC", new Date(-1200, 0, 2), new Date(-1100, 0, 1)],
+    ["Mycenaean Notes", "Ship Sailed from Egypt to Hellas", new Date(-1510, 0, 2), new Date(-1510, 11, 30)],
     ["Mycenaean Notes", "End of Trojan War", new Date(-1208, 0, 2), new Date(-1208, 11, 30)],
     //["Minoan", "Protopalatial MMIB", new Date(-1900, 0, 1), new Date(-1800, 0, 1)],
     //["Minoan", "Protopalatial MMIIA", new Date(-1800, 0, 1), new Date(-1750, 0, 1)],
@@ -49,8 +50,10 @@ export default function Timeline(props) {
     ["Minoan", "LMIIIA", new Date(-1400, 0, 1), new Date(-1350, 0, 1)],
     ["Minoan", "LMIIIB", new Date(-1350, 0, 1), new Date(-1100, 0, 1)],
     ["Minoan Notes", "Palaces Destroyed", new Date(-1450, 0, 1), new Date(-1450, 11, 30)],
-    ["Hittite", "Old Kingdom", new Date(-1700, 0, 1), new Date(-1400, 0, 1)],
-    ["Hittite", "Middle Kingdom", new Date(-1400, 0, 1), new Date(-1200, 0, 1)],
+    ["Hittite", "Old Kingdom", new Date(-1700, 0, 1), new Date(-1500, 0, 1)],
+    ["Hittite", "Middle Kingdom", new Date(-1500, 0, 1), new Date(-1400, 0, 1)],
+    ["Hittite", "New Kingdom", new Date(-1400, 0, 1), new Date(-1200, 0, 1)],
+    ["Hittite Notes", "Battle of Kadesh", new Date(-1274, 0, 1), new Date(-1274, 11, 30)],
   ];
 
   const options = {
@@ -58,10 +61,11 @@ export default function Timeline(props) {
     colors: ['#DDDD00', '#DDDD00', '#DDDD00', '#DDDD00', '#DDDD00', '#DD00DD', '#DD00DD', '#00DDDD', // egypt
              '#000000', '#000000', 
              '#00DD00', '#00DD00', '#00DD00', '#00DD00', '#00DD00', '#00DD00', '#00DD00', // mycenaean
-             '#000000',
+             '#000000', '#000000',
              '#0000DD', '#0000DD', '#0000DD', '#0000DD', '#0000DD', '#0000DD', '#0000DD', // minoan
              '#000000',
-             '#DD0000', '#DD0000',]
+             '#DD0000', '#DD0000', '#DD0000',
+             '#000000',]
   };
 
   useEffect(() => {
@@ -95,7 +99,7 @@ export default function Timeline(props) {
         data={[columns, ...rows]}
         options={options}
         width="100%"
-        height="400px"
+        height="600px"
       />
     </main>
   );

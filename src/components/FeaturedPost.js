@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Col, Card } from 'react-bootstrap';
+import { Col, Card, Badge, Row } from 'react-bootstrap';
 import { categoryColors, categoryNames } from "../libs/categories";
 import { months } from "../libs/dates";
 
@@ -25,7 +25,11 @@ export default function FeaturedPost({
     <Col md={6}>
       <Card className="flex-md-row mb-4 box-shadow">
         <div className="card-body d-flex flex-column align-items-start">
-          <strong className={"d-inline-block mb-2 " + categoryColors[category]}>{categoryNames[category]}</strong>
+          <div className="d-inline-flex flex-row justify-content-between w-100 mb-2">
+              <div><strong className={"mb-2 " + categoryColors[category]}>{categoryNames[category]}</strong></div>
+
+              <div><Badge className="featuredLabel corner-ribbon p-2" variant={"primary"}>Featured</Badge></div>
+          </div>
           <h3 className="mb-0">
             <Link to={link} className="text-dark"><div dangerouslySetInnerHTML={{ __html: title }} /></Link>
           </h3>

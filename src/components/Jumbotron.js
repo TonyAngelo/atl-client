@@ -1,5 +1,6 @@
 import React from "react";
 import { LinkContainer } from 'react-router-bootstrap'
+import { HashLink as Link } from 'react-router-hash-link';
 import { Jumbotron, Button } from 'react-bootstrap';
 
 export default function MyJumbotron({
@@ -20,9 +21,9 @@ export default function MyJumbotron({
       <h1 className="display-4 font-italic">{title}</h1>
       {text !== "" ? <p className="lead my-3">{text}</p> : null}
       {link !== "" 
-        ? <LinkContainer to={link}>
-            <Button className="lead text-white font-weight-bold">{linkText}</Button>
-          </LinkContainer>
+        ? <div><Link to={link} className="jumbotronLink lead text-white font-weight-bold">
+            {linkText}...
+          </Link></div>
         : null
       }
     </Jumbotron>
