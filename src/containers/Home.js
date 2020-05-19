@@ -162,11 +162,11 @@ export default function Home(props) {
           }
           <SidebarTitle>Blog Categories</SidebarTitle>
           <div className="mb-4">
-            {Object.keys(categoryIDs).map((item, index) => <Link key={index} to={"/blog/category/"+item}><Badge className="categoryLink m-2" variant={categoryBadge[categoryIDs[item]]}>{categoryNames[categoryIDs[item]]}</Badge></Link>)}
+            {Object.keys(categoryIDs).map((item, index) => <Link className={"categoryLink m-2 badge badge-" + categoryBadge[categoryIDs[item]]} key={index} to={"/blog/category/"+item}>{categoryNames[categoryIDs[item]]}</Link>)}
           </div>
           <SidebarTitle>Blog Tags</SidebarTitle>
           <div>
-            {tags.map((item, index) => <Link key={index} to={"/blog/tag/"+item.slug}><Badge className="tagLink m-1" variant={"primary"}>{item.name}</Badge></Link>)}
+            {tags.map((item, index) => <Link className="badge badge-primary tagLink m-1" key={index} to={"/blog/tag/"+item.slug}>{item.name}</Link>)}
           </div>
         </Col>
 	    </Row>

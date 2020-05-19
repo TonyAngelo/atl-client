@@ -36,19 +36,27 @@ main .tagLink {
   font-size: 1rem;
 }
 
-main .featuredLabel {
-  font-size: 0.9rem;
-}
-
 a:hover .jumbotronLink {
   text-decoration-color: white;
 }
 
+.featuredPostCard {
+  overflow: hidden;
+}
+
 .corner-ribbon{
-  width: 100px;
+  text-align: center;
+  position: absolute;
+  top: 15px;
+  right: -55px;
+  left: auto;
+  color: white;
+  overflow: hidden;
+  font-size: 0.9rem;
+  width: 180px;
   letter-spacing: 1px;
-  transform: rotate(12deg);
-  -webkit-transform: rotate(12deg);
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
 
 .html-content h2 {
@@ -95,7 +103,7 @@ blockquote {
   display:block;
   background: #fff;
   padding: 15px 20px 15px 45px;
-  /*margin: 0;*/
+  /*margin: 0;
   position: relative;
   
   /*Font*/
