@@ -95,11 +95,12 @@ li.list-nocheck {
   list-style-type: "\2716";
 }
 
-blockquote.wp-block-quote {
+.html-content blockquote.wp-block-quote {
   margin: 0;
+  position: relative;
 }
 
-blockquote {
+blockquote.wp-block-quote {
   display:block;
   background: #fff;
   padding: 15px 20px 15px 45px;
@@ -117,7 +118,7 @@ blockquote {
   border-right-color: #434a53;     
 }
 
-blockquote::before{
+blockquote.wp-block-quote::before{
   content: "\201C"; /*Unicode for Left Double Quote*/
   
   /*Font*/
@@ -133,23 +134,23 @@ blockquote::before{
   
 }
 
-blockquote::after{
+blockquote.wp-block-quote::after{
   /*Reset to make sure*/
   content: "";
 }
 
-blockquote a{
+blockquote.wp-block-quote a{
   text-decoration: none;
   /*background: #eee;*/
   cursor: pointer;
   padding: 0 3px;
 }
 
-blockquote a:hover{
+blockquote.wp-block-quote a:hover{
  /*color: #666;*/
 }
 
-blockquote em{
+blockquote.wp-block-quote em{
   font-style: italic;
 }
 
