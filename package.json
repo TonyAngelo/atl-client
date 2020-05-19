@@ -30,8 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sitemap": "babel-node sitemap-generator.js",
-    "predeploy": "npm run sitemap"
+    "sitemap": "babel-node sitemap-generator.js"
   },
   "eslintConfig": {
     "extends": "react-app"

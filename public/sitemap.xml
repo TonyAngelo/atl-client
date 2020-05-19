@@ -3,17 +3,9 @@
 <url> <loc>https://atlantis.fyi/</loc> </url>
 <url> <loc>https://atlantis.fyi/</loc> </url>
 <url> <loc>https://atlantis.fyi/blog</loc> </url>
-<url> <loc>https://atlantis.fyi/blog/old/:page</loc> </url>
-<url> <loc>https://atlantis.fyi/blog/category/:category</loc> </url>
-<url> <loc>https://atlantis.fyi/blog/tag/:tag</loc> </url>
-<url> <loc>https://atlantis.fyi/blog/:post</loc> </url>
-<url> <loc>https://atlantis.fyi/search/:search</loc> </url>
 <url> <loc>https://atlantis.fyi/theories</loc> </url>
-<url> <loc>https://atlantis.fyi/theories/:theory</loc> </url>
 <url> <loc>https://atlantis.fyi/sources</loc> </url>
-<url> <loc>https://atlantis.fyi/sources/:source</loc> </url>
 <url> <loc>https://atlantis.fyi/people</loc> </url>
-<url> <loc>https://atlantis.fyi/people/:person</loc> </url>
 <url> <loc>https://atlantis.fyi/plato</loc> </url>
 <url> <loc>https://atlantis.fyi/about</loc> </url>
 </urlset>
