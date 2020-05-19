@@ -46,7 +46,6 @@ a:hover .jumbotronLink {
 
 .corner-ribbon{
   width: 100px;
-  line-height: 50px;
   letter-spacing: 1px;
   transform: rotate(12deg);
   -webkit-transform: rotate(12deg);
