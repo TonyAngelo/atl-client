@@ -19,9 +19,9 @@ export default function BlogPost(props) {
   const [theories, setTheories] = useState(false);
 
   let queryStr = `posts?slug=${props.match.params.post}&_fields=title,date,content,slug,excerpt,_links,post_sources,post_people,post_theories`;
-  let sourceStr = `source?_fields=title,excerpt,slug,date&include=`;
-  let theoryStr = `theory?_fields=title,excerpt,slug,date&include=`;
-  let personStr = `person?_fields=title,excerpt,slug,date&include=`;
+  let sourceStr = `source?_fields=title,excerpt,slug,date&per_page=100&include=`;
+  let theoryStr = `theory?_fields=title,excerpt,slug,date&per_page=100&include=`;
+  let personStr = `person?_fields=title,excerpt,slug,date&per_page=100&include=`;
 
   useEffect(() => {
     async function onLoad() {
@@ -50,18 +50,19 @@ export default function BlogPost(props) {
           } 
 
           catLink = payload[0]._links['wp:term'][0].href;
-          tagLink = payload[0]._links['wp:term'][1].href;
-          let souceIDs = [];
+          tagLink = payload[0]._links['wp:term'][1].href + "&per_page=100";
+          let sourceIDs = [];
           let theoryIDs = [];
           let peopleIDs = [];
 
           if(payload[0].post_sources) {
             sourceStr = sourceStr + payload[0].post_sources;
+            console.log(sourceStr)
             response = await fetch(apiHeader + sourceStr);
             if (response.ok) { // ckeck if status code is 200
-              souceIDs = await response.json();
-              //console.log(sourceIDs);
-              setSources(souceIDs);
+              sourceIDs = await response.json();
+              console.log(sourceIDs);
+              setSources(sourceIDs);
             } 
           }
 
