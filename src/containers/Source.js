@@ -14,6 +14,7 @@ export default function Source(props) {
   const [people, setPeople] = useState(false);
   const [theories, setTheories] = useState(false);
   const [posts, setPosts] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   let queryStr = `source?slug=${props.match.params.source}`;
   let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
@@ -99,6 +100,10 @@ export default function Source(props) {
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>
+            {!people.length && !theories.length && !posts.length
+              ? <Col className="d-none d-lg-block" lg={2}></Col>
+              : null
+            }
             <Col lg={8}>
               <Row className="mb-4">
                 <Col>
@@ -110,46 +115,49 @@ export default function Source(props) {
                 data={data[0]}
               />
               {data[0].attachment
-              ? <Row className="my-4">
-                  <Col>
-                    <div className="my-2" style={{ width: '100%', height: 'auto' }}>
-                      <ResponsiveEmbed aspectRatio="1by1">
-                        <embed type={data[0].attachment.post_mime_type} src={cdnRewrite(data[0].attachment.guid)} />
-                      </ResponsiveEmbed>
-                    </div>
-                    <a href={cdnRewrite(data[0].attachment.guid)}>link to pdf</a>
-                  </Col>
-                </Row>
-              : null
+                ? <Row className="my-4">
+                    <Col>
+                      <div className="my-2" style={{ width: '100%', height: 'auto' }}>
+                        <ResponsiveEmbed aspectRatio="1by1">
+                          <embed type={data[0].attachment.post_mime_type} src={cdnRewrite(data[0].attachment.guid)} />
+                        </ResponsiveEmbed>
+                      </div>
+                      <a href={cdnRewrite(data[0].attachment.guid)}>link to pdf</a>
+                    </Col>
+                  </Row>
+                : null
+              }
+            </Col>
+            {people.length > 0 || theories.length > 0 || posts.length > 0
+              ? <Col lg={4}>
+                  {people
+                    ? <SidebarSection
+                        data = {people}
+                        titleSingle = "Person"
+                        titleMultiple = "People"
+                      />
+                    : null
+                  }
+                  {theories
+                    ? <SidebarSection
+                        data = {theories}
+                        titleSingle = "Theory"
+                        titleMultiple = "Theories"
+                      />
+                    : null
+                  }
+                  {posts
+                    ? <SidebarSection
+                        data = {posts}
+                        titleSingle = "Post"
+                        titleMultiple = "Posts"
+                        linkPath = "blog"
+                      />
+                    : null
+                  }
+                </Col>
+              : <Col className="d-none d-lg-block" lg={2}></Col>
             }
-            </Col>
-            <Col lg={4}>
-              {people
-                ? <SidebarSection
-                    data = {people}
-                    titleSingle = "Person"
-                    titleMultiple = "People"
-                  />
-                : null
-              }
-              {theories
-                ? <SidebarSection
-                    data = {theories}
-                    titleSingle = "Theory"
-                    titleMultiple = "Theories"
-                  />
-                : null
-              }
-              {posts
-                ? <SidebarSection
-                    data = {posts}
-                    titleSingle = "Post"
-                    titleMultiple = "Posts"
-                    linkPath = "blog"
-                  />
-                : null
-              }
-            </Col>
           </Row>
         : null
       }

@@ -17,6 +17,7 @@ export default function BlogPost(props) {
   const [sources, setSources] = useState(false);
   const [people, setPeople] = useState(false);
   const [theories, setTheories] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   let queryStr = `posts?slug=${props.match.params.post}&_fields=title,date,content,slug,excerpt,_links,post_sources,post_people,post_theories`;
   let sourceStr = `source?_fields=title,excerpt,slug,date&per_page=100&include=`;
@@ -40,14 +41,17 @@ export default function BlogPost(props) {
           setData(payload);
 
           props.setIsLoaded(true);
-          imageLink = payload[0]._links['wp:featuredmedia'][0].href;
 
-          response = await fetch(imageLink);
-          if (response.ok) { // ckeck if status code is 200
-            const imgPayload = await response.json();
-            //console.log(payload);
-            setImage(imgPayload);
-          } 
+          if('wp:featuredmedia' in payload[0]._links) {
+            imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+
+            response = await fetch(imageLink);
+            if (response.ok) { // ckeck if status code is 200
+              const imgPayload = await response.json();
+              //console.log(payload);
+              setImage(imgPayload);
+            } 
+          }
 
           catLink = payload[0]._links['wp:term'][0].href;
           tagLink = payload[0]._links['wp:term'][1].href + "&per_page=100";
@@ -57,11 +61,11 @@ export default function BlogPost(props) {
 
           if(payload[0].post_sources) {
             sourceStr = sourceStr + payload[0].post_sources;
-            console.log(sourceStr)
+            //console.log(sourceStr)
             response = await fetch(apiHeader + sourceStr);
             if (response.ok) { // ckeck if status code is 200
               sourceIDs = await response.json();
-              console.log(sourceIDs);
+              //console.log(sourceIDs);
               setSources(sourceIDs);
             } 
           }
