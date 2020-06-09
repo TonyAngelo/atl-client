@@ -3,6 +3,7 @@ import { Row, Col, ResponsiveEmbed, Button } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import { cdnRewrite } from "../libs/cdn-rewrite";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
@@ -14,7 +15,7 @@ export default function Source(props) {
   const [people, setPeople] = useState(false);
   const [theories, setTheories] = useState(false);
   const [posts, setPosts] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(false);
 
   let queryStr = `source?slug=${props.match.params.source}`;
   let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
@@ -41,7 +42,7 @@ export default function Source(props) {
           setData(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
 
@@ -55,7 +56,7 @@ export default function Source(props) {
             setPosts(postIDs);
           } 
         } catch (e) {
-          alert(e);
+          setErrors(true);
         }
       }
 
@@ -69,7 +70,7 @@ export default function Source(props) {
             setTheories(theoryIDs);
           } 
         } catch (e) {
-          alert(e);
+          setErrors(true);
         }
       }
 
@@ -83,13 +84,13 @@ export default function Source(props) {
             setPeople(peopleIDs);
           } 
         } catch (e) {
-          alert(e);
+          setErrors(true);
         }
       }
     }
 
     onLoad();
-  }, [queryStr]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -97,6 +98,7 @@ export default function Source(props) {
         title={data.length > 0 ? data[0].title.rendered : ""}
         link={"https://atlantis.fyi/sources/" + props.match.params.source} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>

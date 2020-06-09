@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HashLink as Link } from 'react-router-hash-link';
 import { Row, Col, Badge } from 'react-bootstrap';
+import MyAlert from "../components/Alert";
 import MyJumbotron from "../components/Jumbotron";
 import FeaturedPost from "../components/FeaturedPost";
 import SummaryPost from "../components/SummaryPost";
@@ -16,6 +17,7 @@ export default function Home(props) {
   const [posts, setPosts] = useState([]);
   const [sources, setSources] = useState(false);
   const [tags, setTags] = useState([]);
+  const [errors, setErrors] = useState(false);
   
   const jumboOn = false;
   
@@ -44,7 +46,7 @@ export default function Home(props) {
           setSticky(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
 
       props.setIsLoaded(true);
@@ -58,7 +60,7 @@ export default function Home(props) {
           setPosts(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       
       // get sources
@@ -70,7 +72,7 @@ export default function Home(props) {
           setSources(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
 
       // get tags
@@ -82,12 +84,12 @@ export default function Home(props) {
           setTags(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
     }
 
     onLoad();
-  }, [blogQuery]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -95,6 +97,7 @@ export default function Home(props) {
         title={""}
         link={"https://atlantis.fyi"} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       {jumboOn
         ? <MyJumbotron 
             title = "The Atlantis Finder"
@@ -141,12 +144,9 @@ export default function Home(props) {
                   link = {"/blog/" + post.slug}>
                 </SummaryPost>
               )}
-              {posts.length > 5
-                ? <nav className="blog-pagination">
-        	          <Link className="btn btn-outline-primary" to="/blog#more">More Posts</Link>
-        	        </nav>
-                : null
-              }
+              <nav className="blog-pagination">
+        	      <Link className="btn btn-outline-primary" to="/blog#more">More Posts</Link>
+        	    </nav>
     	      </Col>
           : null
         }

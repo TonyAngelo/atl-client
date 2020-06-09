@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import Chart from "react-google-charts";
 
 
 export default function Timeline(props) {
   // const [data, setData] = useState({});
+  const [errors, setErrors] = useState(false);
+
   // const queryStr = "pages?slug=about&_embed";
+
   const columns = [
     { type: "string", id: "Empire" },
     { type: "string", id: "President" },
@@ -81,14 +85,14 @@ export default function Timeline(props) {
       //     setData(payload[0]);
       //   } 
       // } catch (e) {
-      //   alert(e);
+      //   setErrors(true);
       // }
 
       props.setIsLoaded(true);
     }
 
     onLoad();
-  }, []);
+  }, [props.location.pathname]);
 
   return (
     <main>

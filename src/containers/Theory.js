@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
@@ -14,6 +15,7 @@ export default function Theory(props) {
   //const [people, setPeople] = useState(false);
   const [sources, setSources] = useState(false);
   const [posts, setPosts] = useState(false);
+  const [errors, setErrors] = useState(false);
 
   let queryStr = `theory?slug=${props.match.params.theory}`;
   let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
@@ -38,7 +40,7 @@ export default function Theory(props) {
           setData(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
 
@@ -72,7 +74,7 @@ export default function Theory(props) {
     }
 
     onLoad();
-  }, [queryStr]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -80,6 +82,7 @@ export default function Theory(props) {
         title={data.length > 0 ? data[0].title.rendered : ""}
         link={"https://atlantis.fyi/theories/" + props.match.params.theory} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>

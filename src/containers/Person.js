@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Figure } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
@@ -14,6 +15,7 @@ export default function Person(props) {
   const [sources, setSources] = useState(false);
   const [posts, setPosts] = useState(false);
   const [image, setImage] = useState({});
+  const [errors, setErrors] = useState(false);
 
   let queryStr = `person?slug=${props.match.params.person}`;
   let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
@@ -39,7 +41,7 @@ export default function Person(props) {
           setData(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
       imageLink = payload[0]._links['wp:featuredmedia'][0].href;
@@ -85,7 +87,7 @@ export default function Person(props) {
     }
 
     onLoad();
-  }, [queryStr]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -93,6 +95,7 @@ export default function Person(props) {
         title={data.length > 0 ? data[0].title.rendered : ""}
         link={"https://atlantis.fyi/people/" + props.match.params.person} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>

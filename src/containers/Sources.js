@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Nav } from "react-bootstrap";
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
@@ -12,6 +13,7 @@ export default function Sources(props) {
   const [direction, setDirection] = useState("asc");
   const [filter, setFilter] = useState("date");
   //const [pages, setPages] = useState(100);
+  const [errors, setErrors] = useState(false);
 
   const pages = 100;
 
@@ -28,7 +30,7 @@ export default function Sources(props) {
           setData(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
     }
@@ -50,6 +52,7 @@ export default function Sources(props) {
         title={"Sources"}
         link={"https://atlantis.fyi/sources"} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>Sources</PageTitle>
       <Row className="mb-4">
         <Col xs={6} className="tile-filters"> 

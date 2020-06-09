@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import SearchPost from "../components/SearchPost";
 
@@ -12,6 +13,7 @@ export default function BlogSearch(props) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   //const [pages, setPages] = useState(10);
+  const [errors, setErrors] = useState(false);
   
   const pages = 100;
   let blogQuery = `search?search=${props.match.params.search}&page=${page}&per_page=${pages}&subtype=post,people,sources,theories&_embed`;
@@ -28,14 +30,14 @@ export default function BlogSearch(props) {
           setData(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       
       props.setIsLoaded(true);
     }
 
     onLoad();
-  }, [blogQuery]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -43,6 +45,7 @@ export default function BlogSearch(props) {
         title={"Search: " + props.match.params.search}
         link={"https://atlantis.fyi/search/" + props.match.params.search} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{"Search: " + props.match.params.search}</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={2}></Col>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import { LinkContainer } from 'react-router-bootstrap'
 import { apiHeader } from "../libs/api";
 import { Row, Col, Button } from 'react-bootstrap';
@@ -8,6 +9,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 export default function FinderStep() {
   // const [title, setTitle] = useState("");
   // const [content, setContent] = useState("");
+  const [errors, setErrors] = useState(false);
 
   // const queryStr = "pages?slug=contact&_fields=title,content,date";
 
@@ -23,12 +25,12 @@ export default function FinderStep() {
       //     setContent(payload[0].content.rendered);
       //   } 
       // } catch (e) {
-      //   alert(e);
+      //   setErrors(true);
       // }
     }
 
     onLoad();
-  }, []);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -36,6 +38,7 @@ export default function FinderStep() {
         title={"Finder"}
         link={"https://atlantis.fyi/finder"} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <Row className="my-4 text-center">
         <Col>
           <h1 className="my-2">Atlantis Finder</h1>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Figure } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import FeaturedImage from "../components/FeaturedImage";
@@ -17,7 +18,7 @@ export default function BlogPost(props) {
   const [sources, setSources] = useState(false);
   const [people, setPeople] = useState(false);
   const [theories, setTheories] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(false);
 
   let queryStr = `posts?slug=${props.match.params.post}&_fields=title,date,content,slug,excerpt,_links,post_sources,post_people,post_theories`;
   let sourceStr = `source?_fields=title,excerpt,slug,date&per_page=100&include=`;
@@ -105,11 +106,12 @@ export default function BlogPost(props) {
           }
         } 
       } catch (e) {
-        alert(e);
+        //alert(e);
+        setErrors(true);
       }
     }
     onLoad();
-  }, [queryStr]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -121,6 +123,7 @@ export default function BlogPost(props) {
           />
         : null
       }
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>

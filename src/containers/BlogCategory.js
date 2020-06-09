@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import { categoryIDs, categoryNames } from "../libs/categories";
 import PageTitle from "../components/PageTitle";
 import SummaryPost from "../components/SummaryPost";
@@ -13,6 +14,7 @@ export default function BlogCategory(props) {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   //const [pages, setPages] = useState(10);
+  const [errors, setErrors] = useState(false);
   
   const pages = 100;
   let blogQuery = `?categories=${categoryIDs[props.match.params.category]}&page=${page}&per_page=${pages}&_fields=title,date,excerpt,slug`;
@@ -28,13 +30,13 @@ export default function BlogCategory(props) {
           setPosts(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
     }
 
     onLoad();
-  }, [blogQuery]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -42,6 +44,7 @@ export default function BlogCategory(props) {
         title={"Category: " + categoryNames[categoryIDs[props.match.params.category]]}
         link={"https://atlantis.fyi/blog/category/" + props.match.params.category} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{"Category: " + categoryNames[categoryIDs[props.match.params.category]]}</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={2}></Col>

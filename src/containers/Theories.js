@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import TiledPostPage from "../components/TiledPostPage";
 //import "./Home.css";
@@ -9,6 +10,7 @@ export default function Theories(props) {
   const [data, setData] = useState([]);
   //const [page, setPage] = useState(1);
   //const [pages, setPages] = useState(100);
+  const [errors, setErrors] = useState(false);
 
   const page = 1;
   const pages = 100;
@@ -26,13 +28,13 @@ export default function Theories(props) {
           setData(payload);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
     }
 
     onLoad();
-  }, [queryStr]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -40,6 +42,7 @@ export default function Theories(props) {
         title={"Theories"}
         link={"https://atlantis.fyi/theories"} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>Theories</PageTitle>
       <TiledPostPage
         path = "theories"

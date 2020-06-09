@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarDialogue from "../components/SidebarDialogue";
@@ -16,6 +17,7 @@ export default function Plato(props) {
   const [posts, setPosts] = useState(false);
   const [data, setData] = useState([]);
   const [image, setImage] = useState({});
+  const [errors, setErrors] = useState(false);
 
   const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing,person_posts,_links";
   let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
@@ -53,7 +55,7 @@ export default function Plato(props) {
           // setWriting(otherItems);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
       imageLink = payload[0]._links['wp:featuredmedia'][0].href;
@@ -95,7 +97,7 @@ export default function Plato(props) {
     }
 
     onLoad();
-  }, [queryStr]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -103,6 +105,7 @@ export default function Plato(props) {
         title={"Plato"}
         link={"https://atlantis.fyi/plato"} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{data.length > 0 ? data[0].title.rendered : ""}</PageTitle>
       {data.length > 0
         ? <Row>

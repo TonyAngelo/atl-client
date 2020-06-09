@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
 //import { categoryIDs, categoryNames } from "../libs/categories";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import SummaryPost from "../components/SummaryPost";
 
@@ -14,6 +15,7 @@ export default function BlogTag(props) {
   const [name, setName] = useState("");
   const [page, setPage] = useState(1);
   //const [pages, setPages] = useState(10);
+  const [errors, setErrors] = useState(false);
   
   const pages = 100;
   let tagQuery = `tags?slug=${props.match.params.tag}`
@@ -32,7 +34,7 @@ export default function BlogTag(props) {
           setName(payload[0].name);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       // get posts
       try {
@@ -42,13 +44,14 @@ export default function BlogTag(props) {
           setPosts(payload);
         } 
       } catch (e) {
-        alert(e);
+        //alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
     }
 
     onLoad();
-  }, [blogQuery]);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -56,6 +59,7 @@ export default function BlogTag(props) {
         title={"Tag: " + name}
         link={"https://atlantis.fyi/blog/tag/" + props.match.params.tag} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>{"Tag: " + name}</PageTitle>
 	    <Row>
         <Col className="d-none d-lg-block" lg={2}></Col>

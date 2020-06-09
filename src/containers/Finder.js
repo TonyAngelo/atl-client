@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import { apiHeader } from "../libs/api";
 import { LinkContainer } from 'react-router-bootstrap'
 import { Row, Col, Button } from 'react-bootstrap';
@@ -10,6 +11,7 @@ export default function Finder(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [sources, setSources] = useState([]);
+  const [errors, setErrors] = useState(false);
 
   const queryStr = "question?slug=getting-started";
 
@@ -27,13 +29,13 @@ export default function Finder(props) {
           setSources(payload[0].question_sources);
         } 
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
       props.setIsLoaded(true);
     }
 
     onLoad();
-  }, []);
+  }, [props.location.pathname]);
 
   return (
     <main>
@@ -41,6 +43,7 @@ export default function Finder(props) {
         title={"Finder"}
         link={"https://atlantis.fyi/finder"} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <Row className="my-4 text-center">
         <Col>
           <h1 className="my-2">Atlantis Finder</h1>

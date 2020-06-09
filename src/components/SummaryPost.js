@@ -22,7 +22,7 @@ export default function SummaryPost({
   const myDate = new Date(date);
 
   return (
-    <div id={index === 5 ? "more" : index} className="blog-post">
+    <div id={index === 6 ? "more" : index} className="blog-post">
       <strong className={"d-inline-block mb-2 " + categoryColors[category]}>{categoryNames[category]}</strong>
       <h2 className="blog-post-title">
         <Link to={link} className="text-dark"><div dangerouslySetInnerHTML={{ __html: title }} /></Link>

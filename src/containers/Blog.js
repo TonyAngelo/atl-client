@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Row, Col, Badge } from 'react-bootstrap';
 import { apiHeader } from "../libs/api";
 import StandardHelmet from "../components/StandardHelmet";
+import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import SummaryPost from "../components/SummaryPost";
 import SidebarSection from "../components/SidebarSection";
@@ -17,6 +18,7 @@ export default function Blog(props) {
   const [sources, setSources] = useState(false);
   const [tags, setTags] = useState([]);
   //const [pages, setPages] = useState(10);
+  const [errors, setErrors] = useState(false);
 
   const pages = 10;
   let blogQuery = ``;
@@ -70,8 +72,9 @@ export default function Blog(props) {
 
         }
       } catch (e) {
-        alert(e);
+        setErrors(true);
       }
+
       props.setIsLoaded(true);
 
       // get sources
@@ -108,6 +111,7 @@ export default function Blog(props) {
         title={"Blog"}
         link={"https://atlantis.fyi/blog"} 
       />
+      <MyAlert show={errors} text="Page loaded with error(s)" />
       <PageTitle loaded={props.isLoaded}>Blog Posts</PageTitle>
 	    <Row>
         {posts.length > 0
