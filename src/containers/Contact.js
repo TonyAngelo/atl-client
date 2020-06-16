@@ -10,11 +10,10 @@ export default function Contact(props) {
   const [data, setData] = useState({});
   const [errors, setErrors] = useState(false);
 
-  const queryStr = "pages?slug=contact&_embed";
-
   useEffect(() => {
     async function onLoad() {
       props.setIsLoaded(false);
+      const queryStr = "pages?slug=contact";
       try {
         const response = await fetch(apiHeader + queryStr);
         if (response.ok) { 

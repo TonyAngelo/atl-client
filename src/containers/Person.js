@@ -17,11 +17,6 @@ export default function Person(props) {
   const [image, setImage] = useState({});
   const [errors, setErrors] = useState(false);
 
-  let queryStr = `person?slug=${props.match.params.person}`;
-  let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
-  //let theoryStr = `theory?_fields=title,excerpt,slug,date&include=`;
-  let sourceStr = `source?_fields=title,excerpt,slug,date&page=1&per_page=100&include=`;
-
   useEffect(() => {
     async function onLoad() {
       let payload = [];
@@ -30,6 +25,11 @@ export default function Person(props) {
       let postIDs = [];
       //let theoryIDs = [];
       let sourceIDs = [];
+
+      let queryStr = `person?slug=${props.match.params.person}`;
+      let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
+      //let theoryStr = `theory?_fields=title,excerpt,slug,date&include=`;
+      let sourceStr = `source?_fields=title,excerpt,slug,date&page=1&per_page=100&include=`;
 
       props.setIsLoaded(false);
       // get page content

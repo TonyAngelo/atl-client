@@ -20,11 +20,6 @@ export default function BlogPost(props) {
   const [theories, setTheories] = useState(false);
   const [errors, setErrors] = useState(false);
 
-  let queryStr = `posts?slug=${props.match.params.post}&_fields=title,date,content,slug,excerpt,_links,post_sources,post_people,post_theories`;
-  let sourceStr = `source?_fields=title,excerpt,slug,date&per_page=100&include=`;
-  let theoryStr = `theory?_fields=title,excerpt,slug,date&per_page=100&include=`;
-  let personStr = `person?_fields=title,excerpt,slug,date&per_page=100&include=`;
-
   useEffect(() => {
     async function onLoad() {
       let payload = [];
@@ -32,6 +27,11 @@ export default function BlogPost(props) {
       let imageLink = "";
       let catLink = "";
       let tagLink = "";
+      let queryStr = `posts?slug=${props.match.params.post}&_fields=title,date,content,slug,excerpt,_links,post_sources,post_people,post_theories`;
+      let sourceStr = `source?_fields=title,excerpt,slug,date&per_page=100&include=`;
+      let theoryStr = `theory?_fields=title,excerpt,slug,date&per_page=100&include=`;
+      let personStr = `person?_fields=title,excerpt,slug,date&per_page=100&include=`;
+      
       props.setIsLoaded(false);
       // get page content
       try {

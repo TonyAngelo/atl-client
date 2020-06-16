@@ -13,11 +13,10 @@ export default function FinderReal(props) {
   const [sources, setSources] = useState([]);
   const [errors, setErrors] = useState(false);
 
-  const queryStr = "question?slug=was-atlantis-real";
-
   useEffect(() => {
     async function onLoad() {
       props.setIsLoaded(false);
+      const queryStr = "question?slug=was-atlantis-real";
       //get page content
       try {
         const response = await fetch(apiHeader + queryStr);

@@ -19,10 +19,6 @@ export default function Plato(props) {
   const [image, setImage] = useState({});
   const [errors, setErrors] = useState(false);
 
-  const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing,person_posts,_links";
-  let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
-  let sourceStr = `source?_fields=title,excerpt,slug,date&page=1&per_page=100&include=`;
-
   useEffect(() => {
     async function onLoad() {
       let payload = [];
@@ -32,6 +28,10 @@ export default function Plato(props) {
       let sourceIDs = [];
       let atlItems = [];
       let otherItems = [];
+
+      const queryStr = "person?slug=plato&order=asc&_fields=categories,title,date,content,slug,writing,person_posts,_links";
+      let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
+      let sourceStr = `source?_fields=title,excerpt,slug,date&page=1&per_page=100&include=`;
 
       props.setIsLoaded(false);
       

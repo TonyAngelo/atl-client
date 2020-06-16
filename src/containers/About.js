@@ -11,10 +11,9 @@ export default function About(props) {
   const [data, setData] = useState({});
   const [errors, setErrors] = useState(false);
 
-  const queryStr = "pages?slug=about&_embed";
-
   useEffect(() => {
     async function onLoad() {
+      const queryStr = "pages?slug=about";
       props.setIsLoaded(false);
       //props.setNavKey(headerValues["About"]);
 

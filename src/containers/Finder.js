@@ -13,11 +13,10 @@ export default function Finder(props) {
   const [sources, setSources] = useState([]);
   const [errors, setErrors] = useState(false);
 
-  const queryStr = "question?slug=getting-started";
-
   useEffect(() => {
     async function onLoad() {
       props.setIsLoaded(false);
+      const queryStr = "question?slug=getting-started";
       //get page content
       try {
         const response = await fetch(apiHeader + queryStr);

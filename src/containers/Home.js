@@ -20,17 +20,18 @@ export default function Home(props) {
   const [errors, setErrors] = useState(false);
   
   const jumboOn = false;
-  
-  const stickyQuery = "posts?page=1&per_page=2&sticky=true&_fields=id,categories,title,date,excerpt,slug,sticky";
-  let blogQuery = "posts?page=1&per_page=5&_fields=categories,title,date,excerpt,slug,sticky";
-  //const sideBarQuery = "?page=1&per_page=1&_fields=categories,title,excerpt,slug";
-  let sourceStr = `source?_fields=title,excerpt,slug,date&include=99,98`;
-  let tagStr = `tags?_fields=count,name,slug&page=1&per_page=100&hide_empty=true`;
 
   useEffect(() => {
     async function onLoad() {
       let payload = [];
       let response = "";
+      
+      const stickyQuery = "posts?page=1&per_page=2&sticky=true&_fields=id,categories,title,date,excerpt,slug,sticky";
+      let blogQuery = "posts?page=1&per_page=5&_fields=categories,title,date,excerpt,slug,sticky";
+      //const sideBarQuery = "?page=1&per_page=1&_fields=categories,title,excerpt,slug";
+      let sourceStr = `source?_fields=title,excerpt,slug,date&include=99,98`;
+      let tagStr = `tags?_fields=count,name,slug&page=1&per_page=100&hide_empty=true`;
+
       props.setIsLoaded(false);
       //props.setNavKey("");
       // get sticky

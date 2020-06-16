@@ -16,12 +16,6 @@ export default function Source(props) {
   const [theories, setTheories] = useState(false);
   const [posts, setPosts] = useState(false);
   const [errors, setErrors] = useState(false);
-
-  let queryStr = `source?slug=${props.match.params.source}`;
-  let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
-  let theoryStr = `theory?_fields=title,excerpt,slug,date&include=`;
-  let personStr = `person?_fields=title,excerpt,slug,date&include=`;
-  
   
   useEffect(() => {
     async function onLoad() {
@@ -30,6 +24,10 @@ export default function Source(props) {
       let postIDs = [];
       let theoryIDs = [];
       let peopleIDs = [];
+      let queryStr = `source?slug=${props.match.params.source}`;
+      let postStr = `posts?_fields=title,excerpt,slug,date&include=`;
+      let theoryStr = `theory?_fields=title,excerpt,slug,date&include=`;
+      let personStr = `person?_fields=title,excerpt,slug,date&include=`;
 
       props.setIsLoaded(false);
       // get page content
