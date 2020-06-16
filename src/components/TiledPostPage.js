@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col } from 'react-bootstrap';
-import { xmlParse } from "../libs/xml-parse";
 import TiledPost from "../components/TiledPost";
 
 export default function TiledPostPage({

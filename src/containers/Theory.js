@@ -6,7 +6,7 @@ import MyAlert from "../components/Alert";
 import PageTitle from "../components/PageTitle";
 import BlogSection from "../components/BlogSection";
 import SidebarSection from "../components/SidebarSection";
-import SocialShare from "../components/SocialShare";
+//import SocialShare from "../components/SocialShare";
 import TheoryMap from "../components/TheoryMap";
 //import "./Home.css";
 

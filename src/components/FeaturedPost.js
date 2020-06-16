@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Col, Card, Badge, Row } from 'react-bootstrap';
+import { Col, Card } from 'react-bootstrap';
 import { categoryColors, categoryNames } from "../libs/categories";
 import { months } from "../libs/dates";
 

@@ -43,7 +43,7 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/about" exact component={About} appProps={appProps} />
       //<AppliedRoute path="/contact" exact component={Contact} appProps={appProps} />
       <AppliedRoute path="/timeline" exact component={Timeline} appProps={appProps} />
-      { /* Finally, catch all unmatched routes */ }
+
       <Route component={NotFound} />
     </Switch>
   );

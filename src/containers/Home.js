@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HashLink as Link } from 'react-router-hash-link';
-import { Row, Col, Badge } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import MyAlert from "../components/Alert";
 import MyJumbotron from "../components/Jumbotron";
 import FeaturedPost from "../components/FeaturedPost";
