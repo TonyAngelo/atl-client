@@ -44,17 +44,20 @@ export default function Person(props) {
         setErrors(true);
       }
       props.setIsLoaded(true);
-      imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+      
 
-      try {
-        response = await fetch(imageLink);
-        if (response.ok) { // ckeck if status code is 200
-          const imgPayload = await response.json();
-          //console.log(payload);
-          setImage(imgPayload);
-        } 
-      } catch (e) {
-        alert(e);
+      if('wp:featuredmedia' in payload[0]._links) {
+        try {
+          imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+          response = await fetch(imageLink);
+          if (response.ok) { // ckeck if status code is 200
+            const imgPayload = await response.json();
+            //console.log(payload);
+            setImage(imgPayload);
+          } 
+        } catch (e) {
+          setErrors(true);
+        }
       }
 
       if(payload[0].person_posts) {
@@ -67,7 +70,7 @@ export default function Person(props) {
             setPosts(postIDs);
           } 
         } catch (e) {
-          alert(e);
+          setErrors(true);
         }
       }
 
@@ -81,7 +84,7 @@ export default function Person(props) {
             setSources(sourceIDs);
           } 
         } catch (e) {
-          alert(e);
+          setErrors(true);
         }
       }
     }

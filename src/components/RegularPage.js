@@ -1,11 +1,13 @@
 import React from "react";
 import { Row, Col, Figure } from 'react-bootstrap';
+import FeaturedImage from "../components/FeaturedImage";
 import { cdnRewrite } from "../libs/cdn-rewrite";
 
 export default function RegularPage({
   className = "",
   disabled = false,
   data = {},
+  image = {},
   ...props
 }) {
   if(disabled) {
@@ -13,17 +15,22 @@ export default function RegularPage({
   }
 
   if(Object.keys(data).length === 0) { return null; }
-  
+  console.log(image);
   return (
     <Row>
       <Col className="d-none d-lg-block" lg={2}></Col>
       <Col lg={8}>
-        {data['_embedded']['wp:featuredmedia'].length > 0
-          ? <Figure className="mt-2">
-              <Figure.Image src={cdnRewrite(data['_embedded']['wp:featuredmedia'][0]['source_url'])} fluid rounded />
-              <Figure.Caption>{data['_embedded']['wp:featuredmedia'][0]['alt_text']}</Figure.Caption>
-            </Figure>
-          : null
+        {image['media_details'] && image['media_details']['sizes']['medium_large']
+          ? <FeaturedImage 
+              url={image['media_details']['sizes']['medium_large']['source_url']}
+              caption={image['caption']['rendered']}
+            />
+          : image['media_details']
+            ? <FeaturedImage 
+                url={image['media_details']['sizes']['full']['source_url']}
+                caption={image['caption']['rendered']}
+              />
+            : null
         }
         <div dangerouslySetInnerHTML={{ __html: data.content.rendered }} />
       </Col>

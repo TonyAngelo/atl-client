@@ -9,23 +9,42 @@ import RegularPage from "../components/RegularPage";
 
 export default function About(props) {
   const [data, setData] = useState({});
+  const [image, setImage] = useState({});
   const [errors, setErrors] = useState(false);
 
   useEffect(() => {
     async function onLoad() {
       const queryStr = "pages?slug=about";
+      let payload = [];
+      let response = "";
+      let imageLink = "";
       props.setIsLoaded(false);
       //props.setNavKey(headerValues["About"]);
 
       try {
-        const response = await fetch(apiHeader + queryStr);
+        response = await fetch(apiHeader + queryStr);
         if (response.ok) { 
-          const payload = await response.json();
+          payload = await response.json();
           //console.log(payload)
           setData(payload[0]);
         } 
       } catch (e) {
         setErrors(true);
+      }
+
+      if('wp:featuredmedia' in payload[0]._links) {
+        try {
+          imageLink = payload[0]._links['wp:featuredmedia'][0].href;
+          //console.log(imageLink)
+          response = await fetch(imageLink);
+          if (response.ok) { // ckeck if status code is 200
+            const imgPayload = await response.json();
+            //console.log(imgPayload);
+            setImage(imgPayload);
+          } 
+        } catch (e) {
+          setErrors(true);
+        }
       }
       props.setIsLoaded(true);
     }
@@ -43,6 +62,7 @@ export default function About(props) {
       <PageTitle loaded={props.isLoaded}>About</PageTitle>
       <RegularPage
         data = {data}
+        image = {image}
       />
     </main>
   );

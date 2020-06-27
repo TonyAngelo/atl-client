@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { xmlParse } from "../libs/xml-parse";
+import { cdnRewrite } from "../libs/cdn-rewrite";
 import FeaturedImage from "../components/FeaturedImage";
 import BlogContent from "../components/BlogContent";
 import BlogMeta from "../components/BlogMeta";
